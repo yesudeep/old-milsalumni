@@ -7,3 +7,6 @@
 [submodule "app/gaeutilities"]
 	path = app/gaeutilities
 	url = git://github.com/joerussbowman/gaeutilities.git
+[submodule "app/aeoid"]
+	path = app/aeoid
+	url = git://github.com/Arachnid/aeoid.git

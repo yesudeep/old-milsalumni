@@ -1,0 +1,60 @@
+application: mils-secure
+version: live
+runtime: python
+api_version: 1
+
+default_expiration: "30d"
+
+handlers:
+- url: /s
+  static_dir: public
+  secure: never
+
+- url: /favicon.ico
+  static_files: public/image/icon/favicon.png
+  upload: public/image/icon/favicon.png
+  secure: never
+
+- url: /robots.txt
+  static_files: public/robots.txt
+  upload: public/robots.txt
+  secure: never
+
+- url: /remote_api
+  script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
+  login: admin
+
+- url: /_ah/queue/deferred
+  script: $PYTHON_LIB/google/appengine/ext/deferred/deferred.py
+  login: admin
+
+- url: /console/static/
+  static_dir: console/app/view/static
+
+- url: /dl*
+  script: static.py
+  
+- url: /admin.*
+  script: admin.py
+  login: admin
+
+- url: /worker.*
+  script: workers.py
+  login: admin
+
+- url: /.*
+  script: handlers.py
+
+skip_files: |
+  ^(.*/)?(
+  (app\.yaml)|
+  (app\.yml)|
+  (index\.yaml)|
+  (index\.yml)|
+  (#.*#)|
+  (.*~)|
+  (.*\.py[co])|
+  (.*\.bak)|
+  (.*\.gitignore)|
+  (\..*)
+  )$

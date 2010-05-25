@@ -1,0 +1,65 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+Import('env')
+
+from os.path import splitext, basename
+
+SRC_DIR = './'
+MEDIA_SRC_DIR = '../' + env['MEDIA_SRC_DIR'] + '/'
+MEDIA_DEST_DIR = '../' + env['MEDIA_DEST_DIR'] + '/'
+DEST_DIR = '../' + env['TEMPLATES_DEST_DIR'] + '/'
+TEMPLATE_BUILD_DIR = './_build/'
+TEMPLATE_MINIFIED_DIR=  './_build_min/'
+
+base_site_pickle = env.Pickle('base_site_vars.pkl', Value({
+    'LOADER_SCRIPT': open(MEDIA_SRC_DIR + 'script/lib/chickoojs/src/loader-min.js', 'r').read()
+}))
+env.Cheetah(TEMPLATE_BUILD_DIR + 'base_site.html', 'base_site.html.tmpl', PICKLE=base_site_pickle)
+
+# These templates must have corresponding page scripts.
+PAGE_TEMPLATE_FILES = Split("""
+    index.html
+""")
+
+BASE_TEMPLATE_FILES = Split("""
+    base.html
+""")
+
+# If the template does not use scripts, please place it here.
+TEMPLATE_FILES = BASE_TEMPLATE_FILES + Split("""
+""")
+
+PLAIN_COPIES = Split("""
+
+""")
+
+MINIFIABLE_FILES = BASE_TEMPLATE_FILES + PAGE_TEMPLATE_FILES + Split("""
+    base_site.html
+""")
+
+for f in set(PAGE_TEMPLATE_FILES):
+    template_name = splitext(basename(f))[0]
+    pickle = env.Pickle(template_name + ".pkl", Value({
+        'SELECTOR_SCRIPT': open(MEDIA_DEST_DIR + 'script/page/' + template_name + '.js', 'r').read()
+    }))
+    env.Cheetah(TEMPLATE_BUILD_DIR + f, SRC_DIR + f, PICKLE=pickle)
+
+GENERAL_PICKLE = env.Pickle('general_vars.pkl', Value({}))
+for f in set(TEMPLATE_FILES):
+    env.Cheetah(TEMPLATE_BUILD_DIR + f, SRC_DIR + f, PICKLE=GENERAL_PICKLE)
+
+for f in set(PLAIN_COPIES):
+    env.Command(DEST_DIR + f, SRC_DIR + f, Copy("$TARGET", "$SOURCE"))
+
+for f in set(MINIFIABLE_FILES):
+    # Disable the minifier for HTML and enable the following copy command if you
+    # want to debug markup.
+    
+    # Not jinja.  plain copies.
+    #env.Command(DEST_DIR + f, TEMPLATE_BUILD_DIR + f, Copy("$TARGET", "$SOURCE"))
+    env.HTMLMinify(DEST_DIR + f, TEMPLATE_BUILD_DIR + f, HTML_MINIFY_INLINE=True)
+    
+    # No longer using jinja
+    #env.HTMLMinify(TEMPLATE_MINIFIED_DIR + f, TEMPLATE_BUILD_DIR + f, HTML_MINIFY_INLINE=True)
+    #env.Jinja2Compile(DEST_DIR + f, TEMPLATE_MINIFIED_DIR + f, jinja2_base_dir='_build_min/')

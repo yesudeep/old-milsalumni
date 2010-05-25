@@ -1,0 +1,63 @@
+{% extends "base_site.html" %}
+
+{% block tag_head %}
+    <meta name="keywords" content="maths-school, activation, product activation, deactivation, deinstallation, payment" />
+    <meta name="description" content="{{ OWNER_NAME }}" />
+    {% block tag_stylesheets %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/screen-all{{ CSS_MINIFIED }}.css" type="text/css" media="screen,projection" charset="utf-8" />
+    <!--[if lt IE 7]>
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/ie6{{CSS_MINIFIED}}.css" type="text/css" media="screen,projection" charset="utf-8" />
+    <![endif]-->
+	{% end %}
+	{% block tag_additional_stylesheets %}{% end %}
+{% end %}
+
+{% block tag_body %}
+	{% block tag_wrapper %}
+	<div id="wrapper">
+		{% block tag_wrapper_content %}
+		{% block tag_header %}
+		<div id="header">
+		  <div id="nav-content">
+		    {% block tag_nav_content %}
+		    {% end %}
+		  </div>
+		  <div id="header-content">		     
+		    {% block tag_header_content %}
+		    {% end %}	
+	    </div>	
+    </div>
+		{% end %}
+		{% block tag_trunk %}
+		<div id="trunk">
+			<div id="trunk-content">
+			{% block tag_trunk_content %}
+			{% end %}
+			</div>
+		</div>
+		{% end %}
+		{% block tag_footer %}
+		<div id="footer">
+			<div id="footer-content">
+			{% block tag_footer_content %}
+			  <p>Copyright &copy; {{ COPYRIGHT_YEARS }} <a href="/">{{ OWNER_NAME }}</a>. All rights reserved. Designed and developed by <a href="{{ DEVELOPER_URL }}">{{ DEVELOPER_NAME }}</a>.</p>
+			{% end %}
+      </div>
+		</div>
+		{% end %}
+		{% end %}
+	</div>
+	{% end %}
+{% end %}
+{% block tag_scripts_base %}
+<script type="text/javascript">
+window.__hc_scripts = ["{{ JQUERY_URL }}" #*, 
+{% if LOCAL %}
+"{{ TEXT_MEDIA_URL }}script/lib/chickoojs/src/jquery/tools/1.1.2/jquery.tools.min.js"
+{% else %}
+"http://cdn.jquerytools.org/1.1.2/full/jquery.tools.min.js"
+{% end %}*#
+];
+</script>
+
+{% end %}

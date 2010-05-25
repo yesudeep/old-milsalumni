@@ -85,6 +85,6 @@ class SerializableModel(db.Model):
     def to_json(self, *props):
         from django.utils import simplejson as json
         from jsmin import jsmin
-        
+
         json_dict = self.to_json_dict(*props)
         return jsmin(json.dumps(json_dict))

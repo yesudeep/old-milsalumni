@@ -61,6 +61,8 @@ IMAGE_FILES = Split("""
     image/icon/128x128/search-user.png
     image/icon/128x128/suitcase.png
     image/icon/128x128/write-blog.png
+
+    image/logo/mils-alumni.png
     
     image/button/start.png
 """)

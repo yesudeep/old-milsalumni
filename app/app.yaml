@@ -1,5 +1,5 @@
-application: mils-secure
-version: live
+application: mils-alumni
+version: development
 runtime: python
 api_version: 1
 
@@ -28,6 +28,9 @@ handlers:
   script: $PYTHON_LIB/google/appengine/ext/deferred/deferred.py
   login: admin
 
+- url: /_ah/login_required
+  script: handlers.py
+
 - url: /console/static/
   static_dir: console/app/view/static
 
@@ -39,7 +42,7 @@ handlers:
   login: admin
 
 - url: /worker.*
-  script: workers.py
+  script: handlers.py
   login: admin
 
 - url: /.*

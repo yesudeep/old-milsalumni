@@ -20,6 +20,8 @@ env.Cheetah(TEMPLATE_BUILD_DIR + 'base_site.html', 'base_site.html.tmpl', PICKLE
 # These templates must have corresponding page scripts.
 PAGE_TEMPLATE_FILES = Split("""
     index.html
+    blog.html
+    login.html
 """)
 
 BASE_TEMPLATE_FILES = Split("""

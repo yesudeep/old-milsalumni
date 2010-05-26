@@ -1,10 +1,14 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 from google.appengine.ext import db
 from google.appengine.api import memcache
 
+
 MAX_COUNT = 100
 CACHE_DURATION = 120
 LONG_CACHE_DURATION = 7200
+
 
 def serialize_entities(models):
     if models is None:
@@ -16,6 +20,7 @@ def serialize_entities(models):
         # A list
         return [db.model_to_protobuf(x).Encode() for x in models]
 
+
 def deserialize_entities(data):
     from google.appengine.datastore import entity_pb
     if data is None:
@@ -25,6 +30,7 @@ def deserialize_entities(data):
         return db.model_from_protobuf(entity_pb.EntityProto(data))
     else:
         return [db.model_from_protobuf(entity_pb.EntityProto(x)) for x in data]
+
 
 class SerializableModel(db.Model):
     """

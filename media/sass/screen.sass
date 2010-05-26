@@ -1,3 +1,66 @@
-
 @import base.sass
+@import openid.sass
 
+
+body
+    :background= "transparent" !image_background "scroll repeat-x 0 0"
+    :line-height 1.4
+    :font-family= !font_stack_georgia
+
+
+a
+    :color= !color_link
+    :text-decoration none
+    &:hover, &:visited:hover
+        :color= !color_link_hover
+
+
+h1.title
+    :font-family= !font_stack_myriad_pro
+    :font-size 2.4em
+    :color= !color_title
+    :letter-spacing -0.03em
+    :line-height 1.1
+    strong
+        :font-family= !font_stack_georgia
+        :font-size 0.7em
+        :font-style italic
+        :color= !color_subtitle
+        :display block
+
+h3
+    :font-family= !font_family_sans_serif
+    :font-size 1.1em
+    :font-weight bold
+    :color= !color_heading
+
+
+
+#trunk-content, #footer-content
+    +grid-container()
+
+#header
+    :min-height 50px
+
+#footer
+    :padding-top 40px
+    :display block
+    :clear both
+
+
+#footer-content
+    :font-size 0.9em
+    :color= !color_footer_content
+
+
+// Landing page
+#feature-list
+    li
+        :text-align center
+        :font-size 0.9em
+        :color= !color_light_body_text
+        +grid(3, 12)
+    li:first-child
+        +alpha
+    li:last-child
+        +omega

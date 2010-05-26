@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Application configuration.
-# Copyright (c) 2009 happychickoo.
+# Copyright (c) 2009, 2010 happychickoo.
 #
 # The MIT License
 #
@@ -73,6 +73,8 @@ MAIL_SUBJECT_PREFIX = "[MILS Alumni] "
 MAIL_SIGNATURE = """--
 For more information please visit http://www.%s""" % NAKED_DOMAIN
 
+DEFAULT_TIMEZONE = 'Asia/Kolkata'
+
 # Analytics identifiers.
 GOOGLE_ANALYTICS_ID = 'UA-7340598-3'
 
@@ -124,9 +126,9 @@ ROOT_URL = 'http://%s/' % (HOST_NAME,)
 cdn_urls = {
     'microsoft.jquery-1.3.2': "http://ajax.microsoft.com/ajax/jQuery/jquery-1.3.2.min.js",
     'google.jquery-1.3.2': "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js",
-    'google.jquery-1.4': 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js',
+    'google.jquery-1.4': 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js',
     'jquery.jquery-1.4': "http://code.jquery.com/jquery-1.4.min.js",
-    'local.jquery-1.4': "%sscript/lib/chickoojs/src/jquery/jquery-1.4.min.js" % (MEDIA_URL,),
+    'local.jquery-1.4': "%sscript/lib/chickoojs/src/jquery/jquery-1.4.2.min.js" % (MEDIA_URL,),
     'local.jquery-1.3.2': "%sscript/lib/chickoojs/src/jquery/jquery-1.3.2.min.js" % (MEDIA_URL,),
 }
 

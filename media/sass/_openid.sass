@@ -4,18 +4,19 @@
 #openid-form-container
   :background-color rgba(0,0,0,0.3)
   :padding 30px
-  :width 500px
+  :width 550px
   :margin 0px auto
   :font-family= !font_family_sans_serif
   
 form.openid
+  :margin 0px auto
   :background-color white
   +box-shadow("1px 1px 16px #444")
   :padding 30px
   
   h1
     :line-height 1.4
-    :font-size 1.6em
+    :font-size 1.9em
     :margin-bottom 0.2em
   h2
     :margin-bottom 0.9em
@@ -47,13 +48,14 @@ form.openid
 
 
 input
-  :padding 0.6em
-  :font-size 1em
+  :padding 0.3em
+  :font-size 1.2em
+  :font-family= !font_family_sans_serif
   &[name=openid_username]
     width: 8em
 
   &[name=openid_identifier]
-    width: 18em
+    width: 16em
 
 
 form.openid
@@ -68,7 +70,7 @@ form.openid
     display: inline-block
 
   input[type='submit']
-    margin-left: 1em
+    margin-left: 0.5em
 
 
 .openid_logo

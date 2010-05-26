@@ -55,7 +55,7 @@ class LoginHandler(BaseRequestHandler):
     def post(self):
         federated_identity = self.get_argument('openid_identifier')
         logging.info(federated_identity)
-        login_url = users.create_login_url(dest_url='', federated_identity=federated_identity)
+        login_url = users.create_login_url(dest_url='/blog', federated_identity=federated_identity)
         self.redirect(login_url)
 
 

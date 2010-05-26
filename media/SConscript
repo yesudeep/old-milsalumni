@@ -14,7 +14,7 @@ DEST_DIR = '../' + env['MEDIA_DEST_DIR'] + '/'
 
 LOADER_SCRIPT = SRC_DIR + "script/lib/chickoojs/src/loader.js"
 DEFAULT_MEDIA_URL = "{{ TEXT_MEDIA_URL }}"
-JS_MINIFIED = ""
+JS_MINIFIED = "-min"
 
 SCRIPT_FILES = Split("""
     script/lib/chickoojs/src/jquery/jquery-1.4.2.min.js
@@ -23,6 +23,7 @@ SCRIPT_FILES = Split("""
 
 IMAGE_FILES = Split("""
     image/bg/body.jpg
+    image/bg/presentation-box.png
 
     image/bg/button_overlay.png
     image/bg/textfield_normal.png

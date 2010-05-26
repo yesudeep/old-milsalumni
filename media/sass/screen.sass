@@ -28,12 +28,26 @@ h1.title
         :color= !color_subtitle
         :display block
 
+h2
+    :font-family= !font_family_sans_serif
+    :line-height 1.4
+    :font-size 1.6em
+    :margin-bottom 0.2em
+
+
 h3
     :font-family= !font_family_sans_serif
     :font-size 1.1em
     :font-weight bold
     :color= !color_heading
 
+
+p
+    :color= !color_light_body_text
+
+
+a.signin
+    :display block
 
 .icon
     :display block
@@ -51,6 +65,19 @@ h3
     :background-position= -(128px * 3) 0
     
 
+#presentation
+    :margin-top 2em
+    li.presentation-box
+        //:background= "transparent" !image_presentation_box "scroll no-repeat 0 0"
+        :height 380px
+        :background-color white
+        +grid(8, 12)
+        +box-shadow("0 0 10px #444")
+        :padding 20px
+        :width 577px
+    li
+        +grid(4, 12)
+        
 
 #trunk-content, #footer-content
     +grid-container()
@@ -71,6 +98,7 @@ h3
 
 // Landing page
 #feature-list
+    :clear both
     li
         :text-align center
         :font-size 0.9em

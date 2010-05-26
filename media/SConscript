@@ -23,29 +23,37 @@ SCRIPT_FILES = Split("""
 
 IMAGE_FILES = Split("""
     image/bg/body.jpg
-    
+
     image/bg/button_overlay.png
     image/bg/textfield_normal.png
     image/bg/textfield_readonly.png
-    
+
+    image/openid/aolB.png
     image/openid/aolW.png
     image/openid/blogger.png
     image/openid/claimid.png
+    image/openid/facebookB.png
     image/openid/facebookW.png
     image/openid/fadegrey.png
+    image/openid/flickrB.png
     image/openid/flickr.png
     image/openid/flickrW.png
+    image/openid/googleB.png
     image/openid/googleW.png
     image/openid/livejournal.png
     image/openid/myopenid.png
+    image/openid/myopenidB.png
     image/openid/myopenidW.png
+    image/openid/myspaceB.png
     image/openid/myspaceW.png
+    image/openid/openidB.png
     image/openid/openidW.png
     image/openid/openidico.png
     image/openid/technorati.png
     image/openid/verisign.png
     image/openid/vidoop.png
     image/openid/wordpress.png
+    image/openid/yahooB.png
     image/openid/yahooW.png
     
     image/icon/128x128/calendar.png
@@ -90,7 +98,7 @@ STITCHED_IMAGES = ()
         """),
         orientation='horizontal',
         ),
-        
+
 )'''
 
 
@@ -102,7 +110,7 @@ SCRIPT_BUNDLES = (
     dict(
         selector="index.js",
         sources = Split(
-        COMMON_SCRIPTS + 
+        COMMON_SCRIPTS +
         """
             script/lib/chickoojs/src/jquery/jquery-1.4.2.js
             script/index.js
@@ -111,7 +119,7 @@ SCRIPT_BUNDLES = (
     dict(
         selector="blog.js",
         sources = Split(
-        COMMON_SCRIPTS + 
+        COMMON_SCRIPTS +
         """
             script/blog.js
         """)
@@ -119,7 +127,7 @@ SCRIPT_BUNDLES = (
     dict(
         selector="login.js",
         sources = Split(
-        COMMON_SCRIPTS + 
+        COMMON_SCRIPTS +
         """
             script/lib/chickoojs/src/jquery/jquery-1.4.2.js
             script/lib/jquery.openid/jquery.openid.js
@@ -192,7 +200,7 @@ def generate_perfectly_cacheable_scripts(sources, selector, media_url, page_dir,
         from cStringIO import StringIO
     except ImportError:
         from StringIO import StringIO
-        
+
     def mkdir_p(path):
         try:
             os.makedirs(path)
@@ -200,11 +208,11 @@ def generate_perfectly_cacheable_scripts(sources, selector, media_url, page_dir,
             if exc.errno == errno.EEXIST:
                 pass
             else: raise
-    
+
     string_file = StringIO()
     chunk_size = 2048
     hash_service = hashlib.sha1()
-    
+
     for filepath in sources:
         try:
             file_handle = open(filepath, 'rb')
@@ -215,7 +223,7 @@ def generate_perfectly_cacheable_scripts(sources, selector, media_url, page_dir,
                 string_file.write(chunk)
                 hash_service.update(chunk)
         except IOError, message:
-            print "Error: could not open file `%s' for reading -- permission denied or input/output error" % (filepath,)    
+            print "Error: could not open file `%s' for reading -- permission denied or input/output error" % (filepath,)
     file_digest = hash_service.hexdigest()
     mkdir_p(dest_dir)
     output_filename = dest_dir + file_digest + ".js"
@@ -227,36 +235,36 @@ def generate_perfectly_cacheable_scripts(sources, selector, media_url, page_dir,
             string_file.close()
         except IOError, message:
             print message
-            print "Error: could not open file `%s' for writing -- permission denied or input/output error" % (output_filename,)    
-    
+            print "Error: could not open file `%s' for writing -- permission denied or input/output error" % (output_filename,)
+
     selector_script_contents = """var js = {'all': '%(media_url)s%(page_dir)s%(digest)s%(minified)s.js'};
         window.__hc_scripts.push(js['all']);getScripts(window.__hc_scripts);%(loader_script)s
         """.strip()
-        
+
     selector_script_contents = selector_script_contents % dict(
         digest=file_digest,
         loader_script=open(loader_script, 'r').read(),
         page_dir=page_dir,
         media_url=media_url,
         minified=minified)
-    
+
     selector_script_contents = selector_script_contents.strip()
-    
+
     f = open(selector, 'wb')
     f.write(selector_script_contents)
     f.close()
-    
+
     return output_filename
 
 # Page based resource bundles.
 for bundle in SCRIPT_BUNDLES:
-    #env.YuiCompressorMinify(env.Concatenate([DEST_DIR + bundle['target']], 
+    #env.YuiCompressorMinify(env.Concatenate([DEST_DIR + bundle['target']],
     #    [SRC_DIR + f for f in bundle['sources']]))
     #env.Concatenate([DEST_DIR + bundle['target']])
-    
+
     page_dir = bundle.get("page_dir", "script/page/")
     dest_dir = DEST_DIR + page_dir
-    selector = dest_dir + bundle["selector"]    
+    selector = dest_dir + bundle["selector"]
     output_filename = generate_perfectly_cacheable_scripts(
         sources=[SRC_DIR + f for f in bundle['sources']],
         selector=selector,
@@ -265,13 +273,13 @@ for bundle in SCRIPT_BUNDLES:
         dest_dir=dest_dir,
         loader_script=LOADER_SCRIPT,
         minified=JS_MINIFIED)
-    
+
     env.YuiCompressorMinify(selector)
     env.YuiCompressorMinify(output_filename)
-    
+
 # Page based resource bundles.
 for bundle in CSS_BUNDLES:
-    env.YuiCompressorMinify(env.Concatenate([DEST_DIR + bundle['target']], 
+    env.YuiCompressorMinify(env.Concatenate([DEST_DIR + bundle['target']],
         [SRC_DIR + f for f in bundle['sources']]))
 
 

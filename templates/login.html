@@ -1,27 +1,33 @@
 {% extends "base.html" %}
 
 {% block tag_trunk_content %}
+<div id="openid-form-container">
 <form id="form-login" class="openid" method="post" action=""> 
   <div>
+    <h1>Welcome</h1>
+    <h2>Pick an account to login</h2>
     <ul class="providers"> 
         <li class="openid" title="OpenID">
-            <img src="{{ MEDIA_URL }}image/openid/openidW.png" alt="icon" /> 
+            <img src="{{ MEDIA_URL }}image/openid/openidB.png" alt="icon" /> 
             <span><strong>http://{your-openid-url}</strong></span>
         </li> 
         <li class="direct" title="Google"> 
-		  <img src="{{ MEDIA_URL }}image/openid/googleW.png" alt="icon" /><span>https://www.google.com/accounts/o8/id</span>
+		  <img src="{{ MEDIA_URL }}image/openid/googleB.png" alt="icon" /><span>https://www.google.com/accounts/o8/id</span>
         </li> 
         <li class="direct" title="Yahoo"> 
-		  <img src="{{ MEDIA_URL }}image/openid/yahooW.png" alt="icon" /><span>http://yahoo.com/</span>
+		  <img src="{{ MEDIA_URL }}image/openid/yahooB.png" alt="icon" /><span>http://yahoo.com/</span>
+        </li> 
+        <li class="username" title="Facebook"> 
+            <img src="{{ MEDIA_URL }}image/openid/facebookB.png" alt="icon" /><span>http://facebook.com/<strong>username</strong></span>
         </li> 
         <li class="username" title="AOL screen name"> 
-		  <img src="{{ MEDIA_URL }}image/openid/aolW.png" alt="icon" /><span>http://openid.aol.com/<strong>username</strong></span>
-        </li> 
-        <li class="username" title="MyOpenID user name"> 
-            <img src="{{ MEDIA_URL }}image/openid/myopenid.png" alt="icon" /><span>http://<strong>username</strong>.myopenid.com/</span>
+		  <img src="{{ MEDIA_URL }}image/openid/aolB.png" alt="icon" /><span>http://openid.aol.com/<strong>username</strong></span>
         </li> 
         <li class="username" title="Flickr user name"> 
-            <img src="{{ MEDIA_URL }}image/openid/flickr.png" alt="icon" /><span>http://flickr.com/<strong>username</strong>/</span>
+            <img src="{{ MEDIA_URL }}image/openid/flickrB.png" alt="icon" /><span>http://flickr.com/<strong>username</strong>/</span>
+        </li> 
+        #*<li class="username" title="MyOpenID user name"> 
+            <img src="{{ MEDIA_URL }}image/openid/myopenid.png" alt="icon" /><span>http://<strong>username</strong>.myopenid.com/</span>
         </li> 
         <li class="username" title="Technorati user name"> 
             <img src="{{ MEDIA_URL }}image/openid/technorati.png" alt="icon" /><span>http://technorati.com/people/technorati/<strong>username</strong>/</span>
@@ -43,7 +49,7 @@
         </li> 
         <li class="username" title="Verisign user name"> 
             <img src="{{ MEDIA_URL }}image/openid/verisign.png" alt="icon" /><span>http://<strong>username</strong>.pip.verisignlabs.com/</span>
-        </li> 
+        </li>*#
     </ul>
     </div> 
     <fieldset> 
@@ -52,11 +58,12 @@
         <input type="submit" value="Login" /></div> 
     </fieldset> 
     <fieldset>
-        <label for="openid_identifier">Enter your <a class="openid_logo" href="http://openid.net">OpenID</a></label> 
+        <label for="openid_identifier">Enter your <a class="openid_logo" href="http://openid.net" target="_blank">OpenID</a>:</label> 
         <div><input type="text" name="openid_identifier" /> 
         <input type="submit" value="Login" /></div> 
     </fieldset> 
 </form>
+</div>
 {% end %}
 
 
@@ -64,6 +71,10 @@
 <script type="text/javascript">
 window.__hc_scripts = [];
 </script>
+{% end %}
+
+{% block tag_footer_content %}
+
 {% end %}
 
 {% block tag_scripts %}<script type="text/javascript">$SELECTOR_SCRIPT</script>{% end %}

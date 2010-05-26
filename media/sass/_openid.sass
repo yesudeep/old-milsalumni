@@ -1,4 +1,25 @@
+@import font-stacks.sass
+@import util.sass
+
+#openid-form-container
+  :background-color rgba(0,0,0,0.3)
+  :padding 30px
+  :width 500px
+  :margin 0px auto
+  :font-family= !font_family_sans_serif
+  
 form.openid
+  :background-color white
+  +box-shadow("1px 1px 16px #444")
+  :padding 30px
+  
+  h1
+    :line-height 1.4
+    :font-size 1.6em
+    :margin-bottom 0.2em
+  h2
+    :margin-bottom 0.9em
+  
   ul
     text-align: center
     list-style-type: none
@@ -20,12 +41,14 @@ form.openid
 
   label
     display: block
-    font-weight: bold
-    font-size: larger
+    //font-weight: bold
+    //font-size: larger
     margin-bottom: .5em
 
 
 input
+  :padding 0.6em
+  :font-size 1em
   &[name=openid_username]
     width: 8em
 
@@ -35,15 +58,12 @@ input
 
 form.openid
   ul li.highlight
-    -moz-border-radius: 4px
-    -webkit-border-radius: 4px
+    +border-radius("4px")
     background-color: #FD6
 
   fieldset div
-    font-family: arial
-    -moz-border-radius: 4px
-    -webkit-border-radius: 4px
-    :background= #DCDCDC image_url('openid/fadegrey.png')
+    +border-radius("4px")
+    :background= #DCDCDC image_url(openid/fadegrey.png)
     padding: 10px
     display: inline-block
 
@@ -54,7 +74,7 @@ form.openid
 .openid_logo
   color: #F7931E
   padding: 6px 0px 8px 28px
-  :background= image_url('openid/openidico.png') no-repeat
+  :background= image_url(openid/openidico.png) no-repeat
 
 
 #openid_login

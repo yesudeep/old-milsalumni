@@ -82,26 +82,19 @@ PLAIN_COPY_DIRECTORIES = Split("""
 """)
 
 
-STITCHED_IMAGES = ()
-''' dict(
-        target='image/icon/nav.png',
+STITCHED_IMAGES = (
+     dict(
+        target='image/icon/icons_128x128.png',
         sources=Split("""
-            image/logo/logo.png
-            image/logo/en_US/text.png
-            image/logo/passion-fuels-performance.png
-            image/icon/nav/home.png
-            image/icon/nav/fleet.png
-            image/icon/nav/logistics.png
-            image/icon/nav/construction.png
-            image/icon/nav/drilling.png
-            image/icon/nav/qhse.png
-            image/icon/nav/contact.png
-            image/icon/we-are-hiring.png
+            image/icon/128x128/calendar.png
+            image/icon/128x128/search-user.png
+            image/icon/128x128/write-blog.png
+            image/icon/128x128/suitcase.png
         """),
         orientation='horizontal',
-        ),
+     ),
+)
 
-)'''
 
 
 COMMON_SCRIPTS = """

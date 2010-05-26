@@ -35,6 +35,22 @@ h3
     :color= !color_heading
 
 
+.icon
+    :display block
+.icon.size-128x128
+    :width 128px
+    :height 128px
+    :background= "transparent" !image_icons_128x128 "scroll no-repeat 0 0"
+.icon.size-128x128.calendar
+    :background-position 0 0
+.icon.size-128x128.search-user
+    :background-position= -(128px * 1) 0
+.icon.size-128x128.write-blog
+    :background-position= -(128px * 2) 0
+.icon.size-128x128.suitcase
+    :background-position= -(128px * 3) 0
+    
+
 
 #trunk-content, #footer-content
     +grid-container()
@@ -60,6 +76,8 @@ h3
         :font-size 0.9em
         :color= !color_light_body_text
         +grid(3, 12)
+        span.icon
+            :margin 0px auto
     li:first-child
         +alpha
     li:last-child

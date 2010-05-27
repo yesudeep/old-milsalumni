@@ -5,7 +5,6 @@
  * MIT License.
  */
 jQuery(function(){
-    $("#presentation li.presentation-sidebar .tabs").tabs("div.panes > div",{event: 'mouseover',effect: 'fade'});
-		alert("hi");
+    $("li.presentation-sidebar .tabs").tabs("div.panes > div",{event: 'mouseover',effect: 'fade'});
 });
 

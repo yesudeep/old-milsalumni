@@ -111,6 +111,7 @@ SCRIPT_BUNDLES = (
         COMMON_SCRIPTS +
         """
             script/lib/chickoojs/src/jquery/jquery-1.4.2.js
+						script/lib/chickoojs/src/jquery/tools/jquery.tools.min.js
             script/index.js
         """)
     ),

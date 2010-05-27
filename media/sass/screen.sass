@@ -89,7 +89,19 @@ a.signin
         +grid(4, 12)
         ul.tabs
             li
-                :border 2px
+                :font-family= !font_family_sans_serif
+                :font-size 1.1em
+                a
+                    :background-color rgba(255,255,255,0.5)
+                    :display block
+                    :padding 0.6em 0.9em
+                    :text-decoration none
+                    :color black
+                    &:hover, &:visited:hover
+                        :font-weight bold
+                        :text-decoration none
+                        :background-color #758e9a
+                        :color white
 
 #trunk-content, #footer-content
     +grid-container()

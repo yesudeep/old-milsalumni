@@ -13,8 +13,25 @@ a
     :text-decoration none
     &:hover, &:visited:hover
         :color= !color_link_hover
+        
+blockquote
+    :font-size 1.6em
+    :font-style italic
+    :padding 10px 30px 0px
+    :color = !color_blockquote
+    :line-height 1.5em
 
-
+#header
+    :width 960px
+    :margin 20px auto
+    #nav-content
+        :margin-top 15px
+        :float right
+        >li
+            :font-family = !font_stack_verdana 
+            :margin 0px 5px
+            :min-width 70px
+        
 h1.title
     :font-family= !font_stack_myriad_pro
     :font-size 2.4em
@@ -27,6 +44,29 @@ h1.title
         :font-style italic
         :color= !color_subtitle
         :display block
+
+.title .icon.logo
+    :display block
+    :background= "transparent" !image_icon_logo "scroll no-repeat 0 0"
+    :float left
+    :margin-right 0.5em
+    :width 80px
+    :height 80px
+
+.icon
+    :display block
+.icon.size-128x128
+    :width 128px
+    :height 128px
+    :background= "transparent" !image_icons_128x128 "scroll no-repeat 0 0"
+.icon.size-128x128.calendar
+    :background-position= -(128px * 0) 0
+.icon.size-128x128.search-user
+    :background-position= -(128px * 1) 0
+.icon.size-128x128.write-blog
+    :background-position= -(128px * 2) 0
+.icon.size-128x128.suitcase
+    :background-position= -(128px * 3) 0
 
 h2
     :font-family= !font_family_sans_serif
@@ -48,31 +88,6 @@ p
 
 a.signin
     :display block
-
-.title .icon.logo
-    :display block
-    :background= "transparent" !image_icon_logo "scroll no-repeat 0 0"
-    :float left
-    :margin-right 0.5em
-    :width 80px
-    :height 80px
-
-
-.icon
-    :display block
-.icon.size-128x128
-    :width 128px
-    :height 128px
-    :background= "transparent" !image_icons_128x128 "scroll no-repeat 0 0"
-.icon.size-128x128.calendar
-    :background-position= -(128px * 0) 0
-.icon.size-128x128.search-user
-    :background-position= -(128px * 1) 0
-.icon.size-128x128.write-blog
-    :background-position= -(128px * 2) 0
-.icon.size-128x128.suitcase
-    :background-position= -(128px * 3) 0
-
 
 #presentation
     :clear both
@@ -135,3 +150,23 @@ a.signin
         +alpha
     li:last-child
         +omega
+        
+#about_alumni
+    :width 600px
+    :float left
+    :margin-top 50px
+    img    
+        border: 6px solid white
+        +box-shadow(2px 2px 8px #555)
+    h1
+        :font-size 2em
+        :font-weight normal
+        :letter-spacing 0em
+        :line-height 1.5em
+    h2
+        :font-weight normal
+        :font-size 1.6em
+        :letter-spacing 0em
+        :line-height 1.5em
+        :margin-top 1.4em
+

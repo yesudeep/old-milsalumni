@@ -65,6 +65,8 @@ IMAGE_FILES = Split("""
     image/logo/mils-alumni.png
     
     image/button/start.png
+    
+    image/picture/rainbow_shade_tree.jpg
 """)
 
 CSS_FILES = Split("""
@@ -121,6 +123,14 @@ SCRIPT_BUNDLES = (
         COMMON_SCRIPTS +
         """
             script/blog.js
+        """)
+    ),
+		 dict(
+        selector="about.js",
+        sources = Split(
+        COMMON_SCRIPTS +
+        """
+            script/about.js
         """)
     ),
     dict(

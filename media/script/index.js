@@ -7,8 +7,8 @@
 jQuery(function(){
     jQuery("li#presentation-sidebar .tabs").tabs("ul.panes > li", {
         effect: 'fade',
-				fadeOutSpeed: 50,
-				rotate: true
+		fadeOutSpeed: 50,
+		rotate: true
     }).slideshow({
           autoplay: true
     });

@@ -124,17 +124,19 @@ a.signin
                 a
                     :background-color rgba(255,255,255,0.5)
                     :display block
-                    :padding 0.7em 1.4em
+                    :padding 0.7em 1em
                     :text-decoration none
                     :color black
                     span.icon
                         :float left
                         :margin-right 0.5em
-                    &:hover, &:visited:hover
-                        :font-weight bold
-                        :text-decoration none
-                        :background-color #758e9a
-                        :color white
+                a:hover, a:visited:hover
+                    :text-decoration none
+                    :background-color #859eaa
+                    :color white
+                a.current, a.current:hover, a.current:visited:hover
+                    :color white
+                    :background-color #556e7a
 
 
 #trunk-content, #footer-content

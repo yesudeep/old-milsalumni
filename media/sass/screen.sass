@@ -13,8 +13,25 @@ a
     :text-decoration none
     &:hover, &:visited:hover
         :color= !color_link_hover
+        
+blockquote
+    :font-size 1.6em
+    :font-style italic
+    :padding 10px 30px 0px
+    :color = !color_blockquote
+    :line-height 1.5em
 
-
+#header
+    :width 960px
+    :margin 20px auto
+    #nav-content
+        :margin-top 15px
+        :float right
+        >li
+            :font-family = !font_stack_verdana 
+            :margin 0px 5px
+            :min-width 70px
+        
 h1.title
     :font-family= !font_stack_myriad_pro
     :font-size 2.4em
@@ -56,7 +73,6 @@ a.signin
     :margin-right 0.5em
     :width 80px
     :height 80px
-
 
 .icon
     :display block
@@ -120,11 +136,11 @@ a.signin
     :font-size 0.9em
     :color= !color_footer_content
 
-
 // Landing page
 #feature-list
     :clear both
     li
+        :margin-top 30px
         :text-align center
         :font-size 0.9em
         :color= !color_light_body_text
@@ -138,3 +154,22 @@ a.signin
 
 #alumni-name
     :clear both
+        
+#about_alumni
+    :width 600px
+    :float left
+    :margin-top 50px
+    img    
+        border: 6px solid white
+        +box-shadow(2px 2px 8px #555)
+    h1
+        :font-size 2em
+        :font-weight normal
+        :letter-spacing 0em
+        :line-height 1.5em
+    h2
+        :font-weight normal
+        :font-size 1.6em
+        :letter-spacing 0em
+        :line-height 1.5em
+        :margin-top 1.4em

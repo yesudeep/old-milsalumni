@@ -64,6 +64,10 @@ class BlogHandler(BaseRequestHandler):
     def get(self):
         self.render('blog.html', logout_url=users.create_logout_url('/'))
 
+class AboutHandler(BaseRequestHandler):
+    @login_required
+    def get(self):
+        self.render('about.html', logout_url=users.create_logout_url('/'))
 
 class AuthenticationTokenHandler(SessionRequestHandler):
     """
@@ -125,6 +129,7 @@ urls = (
     (r'/', IndexHandler),
     (r'/blog/?', BlogHandler),
     (r'/login/?', LoginHandler),
+    (r'/about/?', AboutHandler),
     (r'/auth_token/?', AuthenticationTokenHandler),
     
     # Workers

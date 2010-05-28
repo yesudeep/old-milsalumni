@@ -32,7 +32,7 @@ blockquote
             :margin 0px 5px
             :min-width 70px
         
-h1.title
+h1
     :font-family= !font_stack_myriad_pro
     :font-size 2.4em
     :color= !color_title
@@ -46,7 +46,7 @@ h1.title
         :display block
 
 h2
-    :font-family= !font_family_sans_serif
+    :font-family= !font_stack_myriad_pro
     :line-height 1.4
     :font-size 1.6em
     :margin-bottom 0.2em
@@ -61,6 +61,8 @@ h3
 
 p
     :color= !color_light_body_text
+    :line-height 1.4
+    :margin-bottom 1em
 
 
 a.signin
@@ -76,6 +78,18 @@ a.signin
 
 .icon
     :display block
+.icon.size-20x20
+    :width 20px
+    :height 20px
+    :background= "transparent" !image_icons_20x20 "scroll no-repeat 0 0"
+.icon.size-20x20.about
+    :background-position= -(20px * 0) 0
+.icon.size-20x20.logo
+    :background-position= -(20px * 1) 0
+.icon.size-20x20.picture
+    :background-position= -(20px * 2) 0
+.icon.size-20x20.video
+    :background-position= -(20px * 3) 0
 .icon.size-128x128
     :width 128px
     :height 128px
@@ -93,31 +107,35 @@ a.signin
 #presentation
     :clear both
     :margin-top 2em
-    li.presentation-box
-        //:background= "transparent" !image_presentation_box "scroll no-repeat 0 0"
-        :height 300px
-        :background-color white
+    #presentation-content
         +grid(8, 12)
-        +box-shadow("0 0 10px #444")
-        :padding 20px
-        :width 577px
-    li.presentation-sidebar
+        ul.panes
+            li
+                :height 250px
+                :background-color rgba(255,255,255,0.5)
+                :padding 30px
+                :display none
+                :border 10px solid rgba(0,0,0,0.5)
+    #presentation-sidebar
         +grid(4, 12)
         ul.tabs
             li
-                :font-family= !font_family_sans_serif
-                :font-size 1.1em
+                :font-family= !font_stack_myriad_pro
                 a
                     :background-color rgba(255,255,255,0.5)
                     :display block
-                    :padding 0.7em 0.9em
+                    :padding 0.7em 1.4em
                     :text-decoration none
                     :color black
+                    span.icon
+                        :float left
+                        :margin-right 0.5em
                     &:hover, &:visited:hover
                         :font-weight bold
                         :text-decoration none
                         :background-color #758e9a
                         :color white
+
 
 #trunk-content, #footer-content
     +grid-container()
@@ -154,8 +172,9 @@ a.signin
 
 #alumni-name
     :clear both
+    :margin-top 1em
         
-#about_alumni
+//#about_alumni
     :width 600px
     :float left
     :margin-top 50px

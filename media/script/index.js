@@ -5,7 +5,7 @@
  * MIT License.
  */
 jQuery(function(){
-    jQuery("li.presentation-sidebar .tabs").tabs("ul.panes > li", {
+    jQuery("li#presentation-sidebar .tabs").tabs("ul.panes > li", {
         effect: 'fade',
 				fadeOutSpeed: 50,
 				rotate: true

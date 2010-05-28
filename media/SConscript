@@ -65,8 +65,6 @@ IMAGE_FILES = Split("""
     image/logo/mils-alumni.png
     
     image/button/start.png
-    
-    image/picture/rainbow_shade_tree.jpg
 """)
 
 CSS_FILES = Split("""
@@ -88,6 +86,16 @@ PLAIN_COPY_DIRECTORIES = Split("""
 
 
 STITCHED_IMAGES = (
+     dict(
+        target='image/icon/icons_20x20.png',
+        sources=Split("""
+            image/icon/20x20/about.png
+            image/icon/20x20/mils-alumni.png
+            image/icon/20x20/picture.png
+            image/icon/20x20/video.png
+        """),
+        orientation='horizontal',
+     ),
      dict(
         target='image/icon/icons_128x128.png',
         sources=Split("""
@@ -123,14 +131,6 @@ SCRIPT_BUNDLES = (
         COMMON_SCRIPTS +
         """
             script/blog.js
-        """)
-    ),
-		 dict(
-        selector="about.js",
-        sources = Split(
-        COMMON_SCRIPTS +
-        """
-            script/about.js
         """)
     ),
     dict(

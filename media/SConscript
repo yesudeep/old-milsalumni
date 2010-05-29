@@ -29,6 +29,8 @@ IMAGE_FILES = Split("""
     image/bg/textfield_normal.png
     image/bg/textfield_readonly.png
 
+    image/logo-meaning.png
+
     image/openid/aolB.png
     image/openid/aolW.png
     image/openid/blogger.png
@@ -99,7 +101,7 @@ STITCHED_IMAGES = (
         target='image/icon/icons_128x128.png',
         sources=Split("""
             image/icon/128x128/calendar.png
-            image/icon/128x128/search-user.png
+            image/icon/128x128/people.png
             image/icon/128x128/write-blog.png
             image/icon/128x128/suitcase.png
         """),

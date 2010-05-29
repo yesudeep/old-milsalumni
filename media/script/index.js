@@ -9,7 +9,5 @@ jQuery(function(){
         effect: 'fade',
 		fadeOutSpeed: 50,
 		rotate: true
-    }).slideshow({
-          autoplay: true
     });
 });

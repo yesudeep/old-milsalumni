@@ -20,24 +20,12 @@
 		<div id="header">
 		  <div id="nav-content">
 		    {% block tag_nav_content %}
-						<ul>
-					            #* uncomment after creating respective pages
-								<li><a id="nav_about" href="/about/" title="About">About</a></li>
-								<li><a id="nav_blog" href="/blog" title="Alumni Blog"></a></li>
-								<li><a id="nav_students_corner" href="/students/" title="Students' Corner"></a></li>
-								<li><a id="nav_photos" target="_blank" href="{{ PICASA_WEB_ALBUMS_PUBLIC_URL }}" title="Nostalgia"></a></li>
-								<li><a id="nav_announcements" href="/training_announcements/" title="Announcements"></a></li>
-								<li><a id="nav_sponsors" href="/sponsors/" title="Our Resources"></a></li>
-								*#
-								<li><a id="nav_logout" href="{{ logout_url }}" title="Logout">Logout</a></li>
-						</ul>
-				{% end %}
+			{% end %}
 		  </div>
 		  <div id="header-content">		     
 		    {% block tag_header_content %}
 		    {% end %}
 				{% block tag_header_additional_content %}
-						<h1 class="title"><span class="icon size-128x128 logo"></span>MILS Alumni.<strong></strong></h1>
 				{% end %}	
 	    </div>	
     </div>

@@ -6,6 +6,7 @@
  */
 jQuery(function(){
     jQuery("li#presentation-sidebar .tabs").tabs("ul.panes > li", {
+        event: 'mouseover',
         effect: 'fade',
 		fadeOutSpeed: 50,
 		rotate: true

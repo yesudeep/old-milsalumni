@@ -30,6 +30,7 @@ IMAGE_FILES = Split("""
     image/bg/textfield_readonly.png
 
     image/logo-meaning.png
+    image/click-to-play-video.jpg
 
     image/openid/aolB.png
     image/openid/aolW.png

@@ -131,6 +131,7 @@ settings = {
 urls = (
     (r'/', IndexHandler),
     (r'/blog/?', BlogHandler),
+    (r'/_ah/login_required', LoginHandler),
     (r'/login/?', LoginHandler),
     (r'/about/?', AboutHandler),
     (r'/auth_token/?', AuthenticationTokenHandler),

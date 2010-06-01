@@ -27,13 +27,14 @@ import configuration
 import logging
 
 from google.appengine.api import users
-from google.appengine.ext import db
+from google.appengine.ext import db, ereporter
 from google.appengine.ext.webapp.util import run_wsgi_app, login_required
 from tornado.wsgi import WSGIApplication
 from utils import BaseRequestHandler, SessionRequestHandler, send_mail_once
 
 logging.basicConfig(level=logging.DEBUG)
 
+ereporter.register_logger()
 
 class IndexHandler(BaseRequestHandler):
     def get(self):

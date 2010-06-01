@@ -31,6 +31,10 @@ handlers:
 - url: /_ah/login_required
   script: handlers.py
 
+- url: /_ereporter/.*
+  script: $PYTHON_LIB/google/appengine/ext/ereporter/report_generator.py
+  login: admin
+
 - url: /console/static/
   static_dir: console/app/view/static
 

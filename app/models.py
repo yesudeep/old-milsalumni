@@ -26,8 +26,8 @@
 import configuration
 
 from google.appengine.ext import db
+from google.appengine.ext.db import polymodel
 from dbhelper import SerializableModel
-from aeoid import users
 from pytz.gae import pytz
 from countries import ISO_ALPHA_3_CODES
 from aetycoon import DerivedProperty
@@ -128,18 +128,17 @@ DEFAULT_RAILWAY_LINE_CHOICE = 'western'
 
 
 
-class Profile(db.polymodel.PolyModel):
+class Profile(polymodel.PolyModel):
     """
     Base polymodel which is bound to all the contact information
     irrespective of the type of profile.
     """
-    user = users.UserProperty()
+    user = db.UserProperty()
     when_created = db.DateTimeProperty(auto_now_add=True)
     when_modified = db.DateTimeProperty(auto_now=True)
     timezone = db.StringProperty(choices=TIMEZONE_CHOICES, default=DEFAULT_TIMEZONE_CHOICE)
     # Profiles are activated by the administrator.
     is_active = db.BooleanProperty(default=False)
-    
     
     def activate(self):
         from utils import queue_mail_task
@@ -308,46 +307,18 @@ class Location(SerializableModel):
         return self.__unicode__()
 
 
-# Legacy models for migration
-class OldUser(db.Model):
-    username = db.StringProperty(required=True)
-    signin_email = db.EmailProperty()
-    email = db.EmailProperty(required=True)
-    corporate_email = db.EmailProperty()
-    nickname = db.StringProperty()
-    identifier = db.StringProperty(required=True)
-    photo = db.URLProperty()
-    auth_provider = db.StringProperty()
-
-    enable_notifications = db.BooleanProperty(default=True)
-    enable_administrator_contact = db.BooleanProperty(default=True)
-    enable_public_profile = db.BooleanProperty(default=True)
-
-    wants_activation = db.BooleanProperty(default=False)
-    has_updated_profile = db.BooleanProperty(default=False)
-    is_premium = db.BooleanProperty(default=False)
-
-    is_deleted = db.BooleanProperty(default=False)
-    is_starred = db.BooleanProperty(default=False)
-    is_active = db.BooleanProperty(default=False)
-    when_created = db.DateTimeProperty(auto_now_add=True)
-    when_modified = db.DateTimeProperty(auto_now=True)
-
-
-class OldPerson(db.Model):
-    first_name = db.StringProperty()
-    #middle_name = db.StringProperty()
-    last_name = db.StringProperty()
-    birthdate = db.DateProperty()
-    designation = db.StringProperty()
-    company = db.StringProperty()
-    t_shirt_size = db.StringProperty(choices=T_SHIRT_TYPES)
-    gender = db.StringProperty(choices=GENDER_CHOICES)
-    graduation_year = db.IntegerProperty()
-    is_student = db.BooleanProperty(default=False)
-
-    is_deleted = db.BooleanProperty(default=False)
-    is_starred = db.BooleanProperty(default=False)
-    is_active = db.BooleanProperty(default=False)
-    when_created = db.DateTimeProperty(auto_now_add=True)
-    when_modified = db.DateTimeProperty(auto_now=True)
+class Post(SerializableModel):
+    path = db.StringProperty()
+    checksum = db.StringProperty()
+    title = db.StringProperty()
+    is_published = db.BooleanProperty(default=False)
+    when_published = db.DateTimeProperty()
+    content = db.TextProperty()
+    content_html = db.TextProperty()
+    
+    @property
+    def rendered(self):
+        pass #return render_markup(self.content)
+    
+    def __unicode__(self):
+        return self.rendered

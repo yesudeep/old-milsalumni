@@ -104,7 +104,6 @@ else:
     TEXT_MEDIA_URL = MEDIA_URL
     #TEXT_MEDIA_URL = "http://assets.%s/" % (NAKED_DOMAIN, )
 
-
 if DEBUG:
     # Minification suffixes to use for CSS and JS files.
     CSS_MINIFIED = ''
@@ -120,6 +119,8 @@ else:
 #     http://localhost:8000/
 ROOT_URL = 'http://%s/' % (HOST_NAME,)
 
+
+INTRO_VIDEO_URL = 'http://www.youtube.com/watch?v=jrN9xtkYs8E'
 
 # ---------------------------------------------------------------------------
 # Stuff that should be different in production.

@@ -40,24 +40,38 @@ class IndexHandler(BaseRequestHandler):
     def get(self):
         user = users.get_current_user()
         if user:
-            self.redirect('/blog')
+            self.redirect('/profile')
         else:
-            self.render('index.html', login_url='/login')
-
+            self.render('index.html', 
+                video_url=configuration.INTRO_VIDEO_URL, 
+                login_url='/login')
 
 class LoginHandler(BaseRequestHandler):
     def get(self):
         user = users.get_current_user()
         if user:
-            self.redirect('/blog')
+            self.redirect('/profile')
         else:
             self.render('login.html')
         
     def post(self):
+        from models import Profile
+
         federated_identity = self.get_argument('openid_identifier')
-        logging.info(federated_identity)
-        login_url = users.create_login_url(dest_url='/blog', federated_identity=federated_identity)
+        logging.info(federated_identity)        
+        profile = Profile.get_by_key_name(federated_identity)
+        if profile:
+            dest_url = '/blog'
+        else:
+            dest_url = '/register'
+        login_url = users.create_login_url(dest_url=dest_url, federated_identity=federated_identity)
         self.redirect(login_url)
+
+
+class LogoutHandler(BaseRequestHandler):
+    @login_required
+    def get(self):
+        self.redirect(users.create_logout_url(dest_url='/'))
 
 
 class BlogHandler(BaseRequestHandler):
@@ -66,48 +80,30 @@ class BlogHandler(BaseRequestHandler):
         self.render('blog.html', logout_url=users.create_logout_url('/'))
 
 
+class RegisterHandler(BaseRequestHandler):
+    @login_required
+    def get(self):
+        user = users.get_current_user()
+        if user:
+            logging.info("Federated identity: " + str(user.federated_identity()))
+        else:
+            logging.info("NO USER?")
+        
+        return
+        
+        self.render('register.html', logout_url=users.create_logout_url('/'))
+
+
+class ProfileHandler(BaseRequestHandler):
+    @login_required
+    def get(self):
+        self.render('profile.html', logout_url=users.create_logout_url('/'))
+
+
 class AboutHandler(BaseRequestHandler):
     @login_required
     def get(self):
         self.render('about.html', logout_url=users.create_logout_url('/'))
-
-
-class AuthenticationTokenHandler(SessionRequestHandler):
-    """
-    Handle authentication token request sent by RPXNOW.
-    """
-    def convert_to_auth_profile(self, rpx_profile):
-        pass 
-    
-    def get(self):
-        from urllib import urlencode
-        from google.appengine.api import urlfetch
-        from api_preferences import rpxnow
-        try:
-            import json
-        except ImportError:
-            from django.utils import simplejson as json
-
-        token = self.get_argument('token')
-        arguments = {
-            'format': 'json',
-            'apiKey': rpxnow.get('api_key'),
-            'token': token,
-        }
-        api_response = urlfetch.fetch(
-            url=rpxnow.get('api_auth_url'),
-            payload=urlencode(arguments),
-            method=urlfetch.POST,
-            headers={
-                'Content-Type': 'application/x-www-form-urlencoded'
-            })
-        response_content = json.loads(api_response.content)
-        logging.info('@AuthenticationTokenHandler: %s' % (api_response.content,))
-        
-        if response_content['stat'] == 'ok':
-            auth_profile = self.convert_to_auth_profile(response_content['profile'])
-        else:
-            self.redirect('/')
 
 
 class WorkerMailActivateAccountHandler(BaseRequestHandler):
@@ -130,11 +126,13 @@ settings = {
 
 urls = (
     (r'/', IndexHandler),
+    (r'/profile/?', ProfileHandler),
+    (r'/register/?', RegisterHandler),
     (r'/blog/?', BlogHandler),
-    (r'/_ah/login_required', LoginHandler),
     (r'/login/?', LoginHandler),
+    (r'/logout/?', LogoutHandler),
+    (r'/_ah/login_required', LoginHandler),
     (r'/about/?', AboutHandler),
-    (r'/auth_token/?', AuthenticationTokenHandler),
     
     # Workers
     (r'/worker/mail/activate-account/?', WorkerMailActivateAccountHandler),

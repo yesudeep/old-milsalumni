@@ -83,7 +83,7 @@ PLAIN_COPIES = SCRIPT_FILES + CSS_FILES + Split("""
 """)
 
 PLAIN_COPY_DIRECTORIES = Split("""
-
+    image/prettyPhoto
 """)
 
 
@@ -141,7 +141,8 @@ SCRIPT_BUNDLES = (
         COMMON_SCRIPTS +
         """
             script/lib/chickoojs/src/jquery/jquery-1.4.2.js
-						script/lib/chickoojs/src/jquery/tools/jquery.tools.min.js
+			script/lib/chickoojs/src/jquery/tools/jquery.tools.min.js
+			script/lib/jquery.prettyPhoto/js/jquery.prettyPhoto.js
             script/index.js
         """)
     ),

@@ -11,4 +11,6 @@ jQuery(function(){
 		fadeOutSpeed: 50,
 		rotate: true
     });
+    
+    jQuery("a[rel^='prettyPhoto']").prettyPhoto();
 });

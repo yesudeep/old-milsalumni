@@ -109,6 +109,16 @@ STITCHED_IMAGES = (
         orientation='horizontal',
      ),
      dict(
+        target='image/icon/icons_64x64.png',
+        sources=Split("""
+            image/icon/64x64/calendar.png
+            image/icon/64x64/people.png
+            image/icon/64x64/write-blog.png
+            image/icon/64x64/suitcase.png
+        """),
+        orientation='horizontal',
+     ),
+     dict(
         target='image/button/signin.png',
         sources=Split("""
             image/button/start.png

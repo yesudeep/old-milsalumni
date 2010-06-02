@@ -1,0 +1,53 @@
+form.awesome.vertical
+    span.wrap
+        :margin-top 1em
+        :display block
+        :float left
+
+    span.wrap.clear
+        :clear both
+
+    input[type="submit"]
+        :display block
+        :clear both
+        
+
+form.awesome
+    span.wrap
+        position: relative
+        
+        label
+            position: absolute
+            left: 4px
+            top: 4px
+            font-weight: normal
+            width: 264px
+            height: 30px
+            background: #fff
+            -webkit-border-radius: 2px
+            -moz-border-radius: 2px
+            z-index: 1
+            line-height: 27px
+
+            span
+                position: relative
+                top: 1px
+                left: 1px
+
+    input.input-text
+        :min-width 256px
+        padding: 4px 5px
+        background: none
+        position: relative
+        z-index: 10
+
+label.overlay span
+    opacity: 0.6
+    -webkit-transition: opacity 200ms linear
+
+label.focus span
+    opacity: 0.2
+
+label.hastext span
+    opacity: 0.0
+    -webkit-transition: opacity 0ms linear

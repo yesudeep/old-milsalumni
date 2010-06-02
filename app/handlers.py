@@ -31,6 +31,7 @@ from google.appengine.ext import db, ereporter
 from google.appengine.ext.webapp.util import run_wsgi_app, login_required
 from tornado.wsgi import WSGIApplication
 from utils import BaseRequestHandler, SessionRequestHandler, send_mail_once
+from models import Profile
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -40,11 +41,16 @@ class IndexHandler(BaseRequestHandler):
     def get(self):
         user = users.get_current_user()
         if user:
-            self.redirect('/profile')
+            identity = user.federated_identity()
+            if identity and Profile.get_by_key_name(identity):
+                self.redirect('/blog')
+            else:
+                self.redirect('/register')
         else:
             self.render('index.html', 
                 video_url=configuration.INTRO_VIDEO_URL, 
                 login_url='/login')
+
 
 class LoginHandler(BaseRequestHandler):
     def get(self):
@@ -55,8 +61,6 @@ class LoginHandler(BaseRequestHandler):
             self.render('login.html')
         
     def post(self):
-        from models import Profile
-
         federated_identity = self.get_argument('openid_identifier')
         logging.info(federated_identity)        
         profile = Profile.get_by_key_name(federated_identity)
@@ -83,15 +87,22 @@ class BlogHandler(BaseRequestHandler):
 class RegisterHandler(BaseRequestHandler):
     @login_required
     def get(self):
+        from models import DEFAULT_COUNTRY_CODE_CHOICE, GENDER_TYPES_TUPLE_MAP, T_SHIRT_SIZES_TUPLE_MAP, RAILWAY_LINES_TUPLE_MAP, DEFAULT_RAILWAY_LINE_CHOICE
+        from countries import COUNTRIES_LIST
+        
         user = users.get_current_user()
-        if user:
-            logging.info("Federated identity: " + str(user.federated_identity()))
-        else:
-            logging.info("NO USER?")
+        federated_identity = user.federated_identity()
+        logging.info("Federated identity: " + str(federated_identity))
         
-        return
-        
-        self.render('register.html', logout_url=users.create_logout_url('/'))
+        self.render('register.html', 
+            gender_choices=GENDER_TYPES_TUPLE_MAP,
+            t_shirt_sizes=T_SHIRT_SIZES_TUPLE_MAP,
+            railway_lines=RAILWAY_LINES_TUPLE_MAP,
+            countries_list=COUNTRIES_LIST,
+            default_country_code=DEFAULT_COUNTRY_CODE_CHOICE,
+            default_railway_line_choice=DEFAULT_RAILWAY_LINE_CHOICE,
+            federated_identity=federated_identity,
+            logout_url=users.create_logout_url('/'))
 
 
 class ProfileHandler(BaseRequestHandler):

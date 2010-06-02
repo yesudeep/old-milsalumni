@@ -1,6 +1,8 @@
-@import base.sass
+//@import awesome-form.sass
 @import openid.sass
 @import prettyPhoto.sass
+
+@import base.sass
 
 body
     :background= "transparent" !image_background "scroll repeat-x 0 0"
@@ -55,6 +57,25 @@ p
     :line-height 1.4
     :margin-bottom 1em
 
+form.decorated-fields
+    :font-family= !font_family_sans_serif
+    :font-size 0.9em
+    //input[type="text"]
+        :width 250px
+    span.prefix
+        :font-weight bold
+        :color #444
+        em
+            :font-weight normal
+            :color #666
+    label, legend
+        :font-family= !font_family_sans_serif
+    legend
+        :font-size 1.2em
+        :padding-left 210px
+    fieldset
+        :margin-top 1.4em
+
 
 a.signin
     :display block
@@ -107,6 +128,11 @@ a.signin
 .icon.size-64x64.suitcase
     :background-position= -(64px * 3) 0
 
+.content-box
+    +box-shadow("0 0 3px #888")
+    +border-radius("5px")
+    :background-color rgba(255,255,255,0.8)
+    :padding 2.4em 1.4em
 
 #presentation
     :clear both
@@ -185,5 +211,4 @@ a.signin
 #alumni-name
     :clear both
     :margin-top 1em
-
 

@@ -30,24 +30,65 @@
   label
     :display block
     :line-height 1.9em
-    :margin 1.2em auto
+    :margin 0.6em auto
+    :clear both
+    span.prefix
+      :width 200px
+      :margin-right 0.6em
+      :text-align right
+      :display block
+      :float left
+      em
+        :font-size 0.8em
+        :margin-top -1em
+        :display block
+    span.middle
+      em
+        :font-size 0.8em
+        :margin-top -1em
+        :display block
+  input
+    :margin-right 10px
+  label > input[type="checkbox"],
+  input[type="image"],
+  input[type="submit"]
+    :margin-left 210px
+
+=form-clean-inline-layout()
+  label
+    :display block
+    :line-height 1.9em
+    :margin 0.7em auto
+    :clear both
+    span.inline-label
+      :position absolute
+      :margin-left 220px
+      :margin-top 0.4em
+      :z-index 1
     span.prefix
       :width 200px
       :margin-right 10px
       :text-align right
       :display block
       :float left
+      em
+        :font-size 0.8em
+        :margin-top -1em
+        :display block
+  input[type="text"], input[type="password"], textarea
+    :z-index 10
   label > input[type="checkbox"],
   input[type="image"],
   input[type="submit"]
     :margin-left 210px
+
 
 // elem = $(form.table label span)  this = elem.width + elem.margin-right //
 
 =form-clean(!font=!font_default_form)
   legend
     :font bold "1.1em/1.5"
-    :padding-rght 15px
+    :padding-right 15px
   input[type="text"],
   input[type="password"],
   textarea
@@ -88,3 +129,5 @@ form.decorated-fields.horizontal
 form.decorated-fields.table,
 form.decorated-fields.tabular
   +form-clean-tabular-layout
+form.decorated-fields.inline
+  +form-clean-inline-layout

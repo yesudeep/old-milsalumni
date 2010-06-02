@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block tag_trunk_content %}
+    <div class="content-box">
+        <h1>Tell us about yourself</h1>
+        <form id="form-register" class="decorated-fields tabular" method="post" action="">
+            <input type="hidden" name="openid_url" value="{{ federated_identity }}" readonly="readonly" />
+            <label for="email">
+                <span class="prefix">email<em>personal email</em></span>
+                <input type="text" name="email" value="" />
+                <span class="suffix"></span>
+            </label>
+            <label for="corporate_email">
+                <span class="prefix">corporate_email<em>work email</em></span>
+                <input type="text" name="corporate_email" value="" />
+                <span class="suffix"></span>
+            </label>
+            <fieldset>
+                <legend>Personal</legend>
+                <label for="first_name">
+                    <span class="prefix">full name<em>first and last names</em></span>
+                    <input type="text" name="first_name" value="" />
+                    <input type="text" name="last_name" value="" />
+                    <span class="suffix"></span>
+                </label>
+                <label for="gender">
+                    <span class="prefix">gender<em>to address you</em></span>
+                    <select name="gender">
+                        {% for value, display in gender_choices %}
+                        <option value="{{ value }}">{{ display }}</option>
+                        {% end %}
+                    </select>
+                    <span class="suffix"></span>
+                </label>
+                <label for="t_shirt_size">
+                    <span class="prefix">t-shirt size<em>pick the right one</em></span>
+                    <select name="t_shirt_size">
+                        {% for value, display in t_shirt_sizes %}
+                        <option value="{{ value }}">{{ display }}</option>
+                        {% end %}
+                    </select>
+                    <span class="suffix"></span>
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend>Work Profile</legend>
+                <label for="company">
+                    <span class="prefix">company<em>current workplace</em></span>
+                    <input type="text" name="company" value="" />
+                    <span class="suffix"></span>
+                </label>
+                <label for="designation">
+                    <span class="prefix">designation<em>current designation at work</em></span>
+                    <input type="text" name="designation" value="" />
+                    <span class="suffix"></span>
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend>Mailing Address</legend>
+                <label for="apartment">
+                    <span class="prefix">apartment<em>or building</em></span>
+                    <input type="text" name="apartment" value="" />
+                    <span class="suffix"></span>
+                </label>
+                <label for="street_name">
+                    <span class="prefix">street name<em>road/street address</em></span>
+                    <input type="text" name="street_name" value="" />
+                    <span class="suffix"></span>
+                </label>
+                <label for="landmark">
+                    <span class="prefix">landmark<em>nearest prominent landmark</em></span>
+                    <input type="text" name="landmark" value="" />
+                    <span class="suffix"></span>
+                </label>
+                <label for="country_code">
+                    <span class="prefix">country<em></em></span>
+                    <select name="country_code">
+                    {% for country in countries_list %}
+                        <option name="{{ country[2] }}" {% if default_country_code == country[2] %}selected="selected"{% end %}>{{ country[0] }}</option>
+                    {% end %}
+                    </select>
+                    <span class="suffix"></span>
+                </label>
+                <label for="nearest_railway_line">
+                    <span class="prefix">nearest railway line<em></em></span>
+                    <select name="nearest_railway_line">
+                    {% for value, display in railway_lines %}
+                        <option name="{{ value }}" {% if default_railway_line_choice == value %}selected="selected"{% end %}>{{ display }}</option>
+                    {% end %}
+                    </select>
+                    <span class="suffix"></span>
+                </label>
+                <label for="city">
+                    <span class="prefix">city</span>
+                    <input type="text" name="city" value="" />
+                    <span class="suffix"></span>
+                </label>
+            </fieldset>
+
+            <label for="submit">
+                <input type="submit" class="awesome-button large" name="register" value="Continue &raquo;" />
+            </label>
+        </form>
+    </div>
+{% end %}
+
+{% block tag_scripts %}<script type="text/javascript">$SELECTOR_SCRIPT</script>{% end %}

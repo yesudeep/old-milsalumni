@@ -49,10 +49,12 @@ RELATIONSHIP_STATUS_CHOICES = (
 DEFAULT_RELATIONSHIP_STATUS_CHOICE = 'single'
 
 
-GENDER_CHOICES = (
-    'male',
-    'female',
+GENDER_TYPES = dict(
+    male='Male',
+    female='Female',
 )
+GENDER_TYPES_TUPLE_MAP = [(k, v) for k, v in GENDER_TYPES.iteritems()]
+GENDER_CHOICES = GENDER_TYPES.keys()
 DEFAULT_GENDER_CHOICE = 'male'
 
 
@@ -125,7 +127,6 @@ RAILWAY_LINES_TUPLE_MAP = [(k, v) for k, v in RAILWAY_LINES.iteritems()]
 RAILWAY_LINE_CHOICES = [k for k, v in RAILWAY_LINES.iteritems()]
 RAILWAY_LINE_CHOICES.sort()
 DEFAULT_RAILWAY_LINE_CHOICE = 'western'
-
 
 
 class Profile(polymodel.PolyModel):

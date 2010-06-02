@@ -155,6 +155,14 @@ SCRIPT_BUNDLES = (
         """)
     ),
     dict(
+        selector="register.js",
+        sources = Split(
+        COMMON_SCRIPTS +
+        """
+            script/register.js
+        """)
+    ),
+    dict(
         selector="login.js",
         sources = Split(
         COMMON_SCRIPTS +

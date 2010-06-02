@@ -84,8 +84,6 @@ OWNER_URL = 'http://www.%s' % NAKED_DOMAIN
 OWNER_COMPANY = 'MILS Alumni'
 COPYRIGHT_YEARS = '2009, 2010'
 
-TEXT_MEDIA_URL = '/s/'
-MEDIA_URL = TEXT_MEDIA_URL
 
 if SERVER_PORT and SERVER_PORT != '80':
     # We are using the development server.
@@ -93,7 +91,8 @@ if SERVER_PORT and SERVER_PORT != '80':
     HOST_NAME = '%s:%s' % (SERVER_NAME, SERVER_PORT,)
     LOCAL = True
     DEBUG = True
-    #MEDIA_URL = 'http://%s/s/' % (HOST_NAME, )
+    MEDIA_URL = '/s/'
+    TEXT_MEDIA_URL = MEDIA_URL
 else:
     # We are using the production server.
     DEPLOYMENT_MODE = MODE_PRODUCTION
@@ -102,7 +101,6 @@ else:
     DEBUG = False
     MEDIA_URL = "http://%s/s/" % (APPSPOT_DOMAIN,)
     TEXT_MEDIA_URL = MEDIA_URL
-    #TEXT_MEDIA_URL = "http://assets.%s/" % (NAKED_DOMAIN, )
 
 if DEBUG:
     # Minification suffixes to use for CSS and JS files.

@@ -117,6 +117,8 @@ a.signin
         ul.panes
             :height 340px
             li
+                :position relative
+                :z-index 40
                 //:background-color rgba(255,255,255,0.5)
                 :padding 30px 40px
                 :display none
@@ -124,6 +126,7 @@ a.signin
     #presentation-sidebar
         +grid(4, 12)
         ul.tabs
+            :margin-left -30px
             li
                 :font-family= !font_stack_myriad_pro
                 a
@@ -182,3 +185,5 @@ a.signin
 #alumni-name
     :clear both
     :margin-top 1em
+
+

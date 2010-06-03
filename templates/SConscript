@@ -60,8 +60,8 @@ for f in set(MINIFIABLE_FILES):
     # want to debug markup.
     
     # Not jinja.  plain copies.
-    #env.Command(DEST_DIR + f, TEMPLATE_BUILD_DIR + f, Copy("$TARGET", "$SOURCE"))
-    env.HTMLMinify(DEST_DIR + f, TEMPLATE_BUILD_DIR + f, HTML_MINIFY_INLINE=True)
+    env.Command(DEST_DIR + f, TEMPLATE_BUILD_DIR + f, Copy("$TARGET", "$SOURCE"))
+    #env.HTMLMinify(DEST_DIR + f, TEMPLATE_BUILD_DIR + f, HTML_MINIFY_INLINE=True)
     
     # No longer using jinja
     #env.HTMLMinify(TEMPLATE_MINIFIED_DIR + f, TEMPLATE_BUILD_DIR + f, HTML_MINIFY_INLINE=True)

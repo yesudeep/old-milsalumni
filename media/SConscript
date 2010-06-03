@@ -25,6 +25,8 @@ IMAGE_FILES = Split("""
     image/bg/body.jpg
     image/bg/presentation-box.png
 
+    image/icon/favicon.png
+
     image/bg/button_overlay.png
     image/bg/textfield_normal.png
     image/bg/textfield_readonly.png
@@ -160,7 +162,8 @@ SCRIPT_BUNDLES = (
         COMMON_SCRIPTS +
         """
             script/lib/anytime/anytime.js
-            script/lib/anytime/anytimez.js
+            script/lib/anytime/anytimetz.js
+            script/lib/livevalidation/livevalidation.js
             script/register.js
         """)
     ),

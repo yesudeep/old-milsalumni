@@ -6,66 +6,66 @@
 
 {% block tag_trunk_content %}
 <div id="openid-form-container">
-<form id="form-login" class="openid" method="post" action=""> 
+<form id="form-login" class="openid" method="post" action="">
   <div>
     <h1>Welcome</h1>
     <p>You can use your existing Google, Yahoo, Windows Live, AOL, Twitter, or another OpenID account to login.</p>
-    <ul class="providers"> 
+    <ul class="providers">
         <li class="openid" title="OpenID">
-            <img src="{{ MEDIA_URL }}image/openid/openidB.png" alt="icon" /> 
+            <img src="{{ MEDIA_URL }}image/openid/openidB.png" alt="icon" />
             <span><strong>http://{your-openid-url}</strong></span>
-        </li> 
-        <li class="direct" title="Google"> 
+        </li>
+        <li class="direct" title="Google">
 		  <img src="{{ MEDIA_URL }}image/openid/googleB.png" alt="icon" /><span>https://www.google.com/accounts/o8/id</span>
-        </li> 
-        <li class="direct" title="Yahoo"> 
+        </li>
+        <li class="direct" title="Yahoo">
 		  <img src="{{ MEDIA_URL }}image/openid/yahooB.png" alt="icon" /><span>http://yahoo.com/</span>
-        </li> 
-        <li class="username" title="Facebook"> 
+        </li>
+        <li class="username" title="Facebook">
             <img src="{{ MEDIA_URL }}image/openid/facebookB.png" alt="icon" /><span>http://facebook.com/<strong>username</strong></span>
-        </li> 
-        <li class="username" title="AOL screen name"> 
+        </li>
+        <li class="username" title="AOL screen name">
 		  <img src="{{ MEDIA_URL }}image/openid/aolB.png" alt="icon" /><span>http://openid.aol.com/<strong>username</strong></span>
-        </li> 
-        <li class="username" title="Flickr user name"> 
+        </li>
+        <li class="username" title="Flickr user name">
             <img src="{{ MEDIA_URL }}image/openid/flickrB.png" alt="icon" /><span>http://flickr.com/<strong>username</strong>/</span>
-        </li> 
-        #*<li class="username" title="MyOpenID user name"> 
+        </li>
+        #*<li class="username" title="MyOpenID user name">
             <img src="{{ MEDIA_URL }}image/openid/myopenid.png" alt="icon" /><span>http://<strong>username</strong>.myopenid.com/</span>
-        </li> 
-        <li class="username" title="Technorati user name"> 
+        </li>
+        <li class="username" title="Technorati user name">
             <img src="{{ MEDIA_URL }}image/openid/technorati.png" alt="icon" /><span>http://technorati.com/people/technorati/<strong>username</strong>/</span>
-        </li> 
-        <li class="username" title="Wordpress blog name"> 
+        </li>
+        <li class="username" title="Wordpress blog name">
             <img src="{{ MEDIA_URL }}image/openid/wordpress.png" alt="icon" /><span>http://<strong>username</strong>.wordpress.com</span>
-        </li> 
-        <li class="username" title="Blogger blog name"> 
+        </li>
+        <li class="username" title="Blogger blog name">
             <img src="{{ MEDIA_URL }}image/openid/blogger.png" alt="icon" /><span>http://<strong>username</strong>.blogspot.com/</span>
-        </li> 
-        <li class="username" title="LiveJournal blog name"> 
+        </li>
+        <li class="username" title="LiveJournal blog name">
             <img src="{{ MEDIA_URL }}image/openid/livejournal.png" alt="icon" /><span>http://<strong>username</strong>.livejournal.com</span>
-        </li> 
-        <li class="username" title="ClaimID user name"> 
+        </li>
+        <li class="username" title="ClaimID user name">
             <img src="{{ MEDIA_URL }}image/openid/claimid.png" alt="icon" /><span>http://claimid.com/<strong>username</strong></span>
-        </li> 
-        <li class="username" title="Vidoop user name"> 
+        </li>
+        <li class="username" title="Vidoop user name">
             <img src="{{ MEDIA_URL }}image/openid/vidoop.png" alt="icon" /><span>http://<strong>username</strong>.myvidoop.com/</span>
-        </li> 
-        <li class="username" title="Verisign user name"> 
+        </li>
+        <li class="username" title="Verisign user name">
             <img src="{{ MEDIA_URL }}image/openid/verisign.png" alt="icon" /><span>http://<strong>username</strong>.pip.verisignlabs.com/</span>
         </li>*#
     </ul>
-    </div> 
-    <fieldset> 
-        <label for="openid_username">Enter your <span>Provider user name</span></label> 
-        <div><span></span><input type="text" name="openid_username" /><span></span> 
-        <input type="submit" value="Login" class="awesome-button large" /></div> 
-    </fieldset> 
+    </div>
     <fieldset>
-        <label for="openid_identifier">Enter your <a class="openid_logo" href="http://openid.net" target="_blank">OpenID</a>:</label> 
-        <div><input type="text" name="openid_identifier" /> 
-        <input type="submit" value="Login" class="awesome-button large" /></div> 
-    </fieldset> 
+        <label for="openid_username">Enter your <span>Provider user name</span></label>
+        <div><span></span><input type="text" name="openid_username" /><span></span>
+        <input type="submit" value="Login" class="awesome-button large" /></div>
+    </fieldset>
+    <fieldset>
+        <label for="openid_identifier">Enter your <a class="openid_logo" href="http://openid.net" target="_blank">OpenID</a>:</label>
+        <div><input type="text" name="openid_identifier" />
+        <input type="submit" value="Login" class="awesome-button large" /></div>
+    </fieldset>
 </form>
 </div>
 {% end %}

@@ -1,113 +1,72 @@
-
-// script by Josh Fraser (http://www.onlineaspect.com)
-function determineTimeZone() {
-	var rightNow = new Date();
-	var jan1 = new Date(rightNow.getFullYear(), 0, 1, 0, 0, 0, 0);  // jan 1st
-	var june1 = new Date(rightNow.getFullYear(), 6, 1, 0, 0, 0, 0); // june 1st
-	var temp = jan1.toGMTString();
-	var jan2 = new Date(temp.substring(0, temp.lastIndexOf(" ")-1));
-	temp = june1.toGMTString();
-	var june2 = new Date(temp.substring(0, temp.lastIndexOf(" ")-1));
-	var std_time_offset = (jan1 - jan2) / (1000 * 60 * 60);
-	var daylight_time_offset = (june1 - june2) / (1000 * 60 * 60);
-	var dst;
-	if (std_time_offset == daylight_time_offset) {
-		dst = "0"; // daylight savings time is NOT observed
-	} else {
-		// positive is southern, negative is northern hemisphere
-		var hemisphere = std_time_offset - daylight_time_offset;
-		if (hemisphere >= 0)
-			std_time_offset = daylight_time_offset;
-		dst = "1"; // daylight savings time is observed
-	}
-	console.log(convert(std_time_offset)+","+dst);
-	/*
-	var i;
-	// check just to avoid error messages
-	if (document.getElementById('timezone')) {
-		for (i = 0; i < document.getElementById('timezone').options.length; i++) {
-			if (document.getElementById('timezone').options[i].value == convert(std_time_offset)+","+dst) {
-				document.getElementById('timezone').selectedIndex = i;
-				break;
-			}
-		}
-	}*/
-}
-
-function convert(value) {
-	var hours = parseInt(value, 10);
-   	value -= parseInt(value);
-	value *= 60;
-	var minutes = parseInt(value, 10);
-   	value -= parseInt(value);
-	value *= 60;
-	var seconds = parseInt(value, 10);
-	var display_hours = hours;
-	// handle GMT case (00:00)
-	if (hours == 0) {
-		display_hours = "00";
-	} else if (hours > 0) {
-		// add a plus sign and perhaps an extra 0
-		display_hours = (hours < 10) ? "+0" + hours : "+" + hours;
-	} else {
-		// add an extra 0 if needed 
-		display_hours = (hours > -10) ? "-0" + Math.abs(hours) : hours;
-	}
-	
-	minutes = (minutes < 10) ? "0" + minutes : minutes;
-	return display_hours + ":" + minutes;
-}
-
 jQuery(function(){
-    determineTimeZone();
-    AnyTime.picker('birthdate', {format:"%d-%m-%Y"});
-});
+    var elements = {
+        fieldEmail: jQuery('#email'),
+        fieldPhone: jQuery('#phone'),
+        fieldFirstName: jQuery('#first_name'),
+        fieldLastName: jQuery('#last_name'),
+        fieldBirthdate: jQuery('#birthdate'),
+        fieldCorporateEmail: jQuery('#corporate_email'),
+        fieldCompany: jQuery('#company'),
+        fieldDesignation: jQuery('#designation'),
+        fieldsetPersonal: jQuery('#fieldset_personal'),
+        fieldsetWorkProfile: jQuery('#fieldset_work_profile'),
+        fieldsetMailingAddress: jQuery('#fieldset_mailing_address'),
+        fieldsetContact: jQuery('#fieldset_contact')
+    };
+    var DISPLAY_SPEED = 'fast';
 
-/*jQuery(function(){
-    // Select all textboxes and assign them to an array
-    var textboxes = jQuery('form.awesome input.input-text');
-    
-    // Iterate through all textboxes in the form
-    textboxes.each(function(index, input){
-        
-        var label = jQuery(input).prev();
-        
-        label.wrapInner("<span></span>")
-        label.children("span").animate({opacity: 0.6}, 0);
-        
-        // check for autocomplete by browser
-        if( index == 0 ){
-            setInterval(function(){
-                textboxes.each(function(index,inputX){
-                    if (inputX.value != "") {
-                        jQuery(inputX).prev().children("span").animate({opacity: 0},0);
-                    }
-                });
-            }, 100);
-        }
-    
-        // Fade the label back when a field gains focus     
-        input.onfocus = function(){
-            if (input.value == ""){
-                label.children("span").animate({opacity: 0.4}, 5);     
+    AnyTime.picker('birthdate', {format:"%d-%m-%Y"});
+
+    // Validations
+    // Contact fieldset.
+    var paramsFieldsetContact = {
+        onValid: function(){
+            this.insertMessage(this.createMessageSpan());
+            this.addFieldClass();
+            if (elements.fieldEmail.val()
+                && elements.fieldPhone.val()){
+                elements.fieldsetPersonal.show(DISPLAY_SPEED);
             }
         }
-        
-        // Check if a field is empty when the user switches out
-        input.onblur = function(){
-            if (input.value == ""){
-                label.children("span").animate({opacity: 0.6}, 5);        
+    };
+    new LiveValidation('email', paramsFieldsetContact)
+        .add(Validate.Presence)
+        .add(Validate.Email);
+    new LiveValidation('phone', paramsFieldsetContact)
+        .add(Validate.Presence);
+
+    // Personal fieldset.
+    var paramsFieldsetPersonal = {
+        onValid: function(){
+            this.insertMessage(this.createMessageSpan());
+            this.addFieldClass();
+            if (elements.fieldFirstName.val()
+                && elements.fieldLastName.val()
+                && elements.fieldBirthdate.val()){
+                elements.fieldsetWorkProfile.show(DISPLAY_SPEED);
             }
         }
-        
-        // Fade the label back if a field has text      
-        if (input.value != "") {
-            label.addClass('hastext');
+    };
+    new LiveValidation('first_name', paramsFieldsetPersonal).add(Validate.Presence);
+    new LiveValidation('last_name', paramsFieldsetPersonal).add(Validate.Presence);
+    new LiveValidation('birthdate', paramsFieldsetPersonal)
+        .add(Validate.Presence)
+        .add(Validate.Format, {pattern: /\d{2}-\d{2}\-\d{4}/i, failureMessage: 'The date format is not correct.'});
+
+    // Work profile fieldset.
+    var paramsFieldsetWorkProfile = {
+        onValid: function(){
+            this.insertMessage(this.createMessageSpan());
+            this.addFieldClass();
+            if (elements.fieldCompany.val()
+                && elements.fieldDesignation.val()){
+                elements.fieldsetMailingAddress.show(DISPLAY_SPEED);
+            }
         }
-        
-        // Fade the label back when the user starts to type     
-        input.onkeypress = function(){
-            label.children("span").animate({opacity: 0}, 5);
-        };
-    });
-});*/
+    };
+    new LiveValidation('corporate_email', paramsFieldsetWorkProfile).add(Validate.Email);
+    new LiveValidation('company', paramsFieldsetWorkProfile).add(Validate.Presence);
+    new LiveValidation('designation', paramsFieldsetWorkProfile).add(Validate.Presence);
+
+
+});

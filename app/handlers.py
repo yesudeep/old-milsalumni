@@ -95,10 +95,17 @@ class RegisterHandler(BaseRequestHandler):
     def get(self):
         from models import DEFAULT_COUNTRY_CODE_CHOICE, GENDER_TYPES_TUPLE_MAP, T_SHIRT_SIZES_TUPLE_MAP, RAILWAY_LINES_TUPLE_MAP, DEFAULT_RAILWAY_LINE_CHOICE, DEFAULT_PHONE_TYPE_CHOICE, PHONE_TYPES_TUPLE_MAP
         from pytz.gae import pytz
+        from services import country_code_from_ip_address
         
         user = users.get_current_user()
         federated_identity = user.federated_identity()
         logging.info("Federated identity: " + str(federated_identity))
+        
+        determined_country_code = country_code_from_ip_address(self.request.remote_ip)
+        if determined_country_code.lower() == 'zz':
+            determined_country_code = 'IN'
+        country_code = COUNTRY_ISO_ALPHA_TABLE.get(determined_country_code)
+        timezones = pytz.country_timezones(determined_country_code)
         
         self.render('register.html', 
             gender_choices=GENDER_TYPES_TUPLE_MAP,
@@ -106,12 +113,15 @@ class RegisterHandler(BaseRequestHandler):
             railway_lines=RAILWAY_LINES_TUPLE_MAP,
             countries_list=COUNTRIES_LIST,
             phone_types=PHONE_TYPES_TUPLE_MAP,
-            timezones=pytz.all_timezones,
+            timezones=timezones,
             default_phone_type=DEFAULT_PHONE_TYPE_CHOICE,
-            default_country_code=DEFAULT_COUNTRY_CODE_CHOICE,
+            default_country_code=country_code,
             default_railway_line_choice=DEFAULT_RAILWAY_LINE_CHOICE,
             federated_identity=federated_identity,
             logout_url=users.create_logout_url('/'))
+    
+    def post(self):
+        logging.info(self.request.arguments)
 
 
 class ProfileHandler(BaseRequestHandler):

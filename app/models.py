@@ -134,7 +134,7 @@ class Profile(polymodel.PolyModel):
     Base polymodel which is bound to all the contact information
     irrespective of the type of profile.
     """
-    user = db.UserProperty()
+    user = db.UserProperty(auto_current_user_add=True)
     when_created = db.DateTimeProperty(auto_now_add=True)
     when_modified = db.DateTimeProperty(auto_now=True)
     timezone = db.StringProperty(choices=TIMEZONE_CHOICES, default=DEFAULT_TIMEZONE_CHOICE)

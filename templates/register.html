@@ -11,7 +11,7 @@
                 <span class="suffix"></span>
             </label>
             <label for="corporate_email">
-                <span class="prefix">corporate_email<em>work email</em></span>
+                <span class="prefix">corporate email<em>work email</em></span>
                 <input type="text" name="corporate_email" value="" />
                 <span class="suffix"></span>
             </label>
@@ -19,10 +19,15 @@
                 <legend>Personal</legend>
                 <label for="first_name">
                     <span class="prefix">full name<em>first and last names</em></span>
-                    <input type="text" name="first_name" value="" />
-                    <input type="text" name="last_name" value="" />
+                    <input type="text" name="first_name" value="" placeholder="First Name" />
+                    <input type="text" name="last_name" value="" placeholder="Last Name" />
                     <span class="suffix"></span>
                 </label>
+                <label for="birthdate">
+                    <span class="prefix">birthdate<em>let the world greet you</em></span>
+                    <input type="text" id="birthdate" value="" />
+                    <span class="suffix"></span>
+                </label>                
                 <label for="gender">
                     <span class="prefix">gender<em>to address you</em></span>
                     <select name="gender">
@@ -33,7 +38,7 @@
                     <span class="suffix"></span>
                 </label>
                 <label for="t_shirt_size">
-                    <span class="prefix">t-shirt size<em>pick the right one</em></span>
+                    <span class="prefix">t-shirt size<em>to win a t-shirt!</em></span>
                     <select name="t_shirt_size">
                         {% for value, display in t_shirt_sizes %}
                         <option value="{{ value }}">{{ display }}</option>
@@ -76,7 +81,7 @@
                     <span class="prefix">country<em></em></span>
                     <select name="country_code">
                     {% for country in countries_list %}
-                        <option name="{{ country[2] }}" {% if default_country_code == country[2] %}selected="selected"{% end %}>{{ country[0] }}</option>
+                        <option value="{{ country[2] }}" {% if default_country_code == country[2] %}selected="selected"{% end %}>{{ country[0] }}</option>
                     {% end %}
                     </select>
                     <span class="suffix"></span>
@@ -85,14 +90,41 @@
                     <span class="prefix">nearest railway line<em></em></span>
                     <select name="nearest_railway_line">
                     {% for value, display in railway_lines %}
-                        <option name="{{ value }}" {% if default_railway_line_choice == value %}selected="selected"{% end %}>{{ display }}</option>
+                        <option value="{{ value }}" {% if default_railway_line_choice == value %}selected="selected"{% end %}>{{ display }}</option>
                     {% end %}
                     </select>
                     <span class="suffix"></span>
                 </label>
+                <label for="state_or_province">
+                    <span class="prefix">state<em>or province</em></span>
+                    <input type="text" name="state_or_province" value="" />
+                    <span class="suffix"></span>
+                </label>                
                 <label for="city">
                     <span class="prefix">city</span>
                     <input type="text" name="city" value="" />
+                    <span class="suffix"></span>
+                </label>
+                <label for="timezone">
+                    <span class="prefix">timezone</span>
+                    <select name="timezone">
+                    {% for timezone in timezones %}
+                        <option value="{{ timezone }}">{{ timezone }}</option>
+                    {% end %}
+                    </select>
+                    <span class="suffix"></span>
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend>Contact</legend>
+                <label for="phone_1">
+                    <span class="prefix">phone</span><em></em></span>
+                    <input type="text" name="phone_1" />
+                    <select name="phone_type_1">
+                    {% for value, display in phone_types %}
+                        <option value="{{ value }}" {% if default_phone_type == value %}selected="selected"{% end %}>{{ display }}</option>
+                    {% end %}
+                    </select>
                     <span class="suffix"></span>
                 </label>
             </fieldset>

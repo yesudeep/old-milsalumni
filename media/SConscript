@@ -159,6 +159,8 @@ SCRIPT_BUNDLES = (
         sources = Split(
         COMMON_SCRIPTS +
         """
+            script/lib/anytime/anytime.js
+            script/lib/anytime/anytimez.js
             script/register.js
         """)
     ),
@@ -178,6 +180,7 @@ CSS_BUNDLES = (
     dict(
         target="css/screen-all.css",
         sources = Split("""
+            script/lib/anytime/anytime.css
             css/screen.css
         """)
     ),

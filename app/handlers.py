@@ -99,6 +99,8 @@ class RegisterHandler(BaseRequestHandler):
         
         user = users.get_current_user()
         federated_identity = user.federated_identity()
+        email = user.email()
+        logging.info('Email: ' + email)
         logging.info("Federated identity: " + str(federated_identity))
         
         determined_country_code = country_code_from_ip_address(self.request.remote_ip)
@@ -106,17 +108,26 @@ class RegisterHandler(BaseRequestHandler):
             determined_country_code = 'IN'
         country_code = COUNTRY_ISO_ALPHA_TABLE.get(determined_country_code)
         timezones = pytz.country_timezones(determined_country_code)
-        
+        railway_line_choice = DEFAULT_RAILWAY_LINE_CHOICE
+        city = 'Mumbai'
+        state_or_province = 'Maharashtra'
+        if country_code != 'IND':
+            railway_line_choice = 'other'
+            city = ''
+            state_or_province = ''
         self.render('register.html', 
+            email=email,
             gender_choices=GENDER_TYPES_TUPLE_MAP,
             t_shirt_sizes=T_SHIRT_SIZES_TUPLE_MAP,
             railway_lines=RAILWAY_LINES_TUPLE_MAP,
             countries_list=COUNTRIES_LIST,
             phone_types=PHONE_TYPES_TUPLE_MAP,
             timezones=timezones,
+            state_or_province=state_or_province,
+            city=city,
             default_phone_type=DEFAULT_PHONE_TYPE_CHOICE,
             default_country_code=country_code,
-            default_railway_line_choice=DEFAULT_RAILWAY_LINE_CHOICE,
+            default_railway_line_choice=railway_line_choice,
             federated_identity=federated_identity,
             logout_url=users.create_logout_url('/'))
     

@@ -10,12 +10,12 @@
                 <legend>Contact</legend>
                 <label for="email">
                     <span class="prefix">email<em>personal email</em></span>
-                    <input type="text" id="email" value="" />
+                    <input type="text" id="email" value="{{ email }}" />
                     <span class="suffix"></span>
                 </label>
                 <label for="phone">
                     <span class="prefix">phone<em>e.g. your mobile number</em></span>
-                    <input type="text" id="phone" />
+                    <input type="text" id="phone" class="digits" />
                     <select id="phone_type">
                     {% for value, display in phone_types %}
                         <option value="{{ value }}" {% if default_phone_type == value %}selected="selected"{% end %}>{{ display }}</option>
@@ -28,8 +28,8 @@
                 <legend>Personal</legend>
                 <label for="first_name">
                     <span class="prefix">full name<em>first and last names</em></span>
-                    <input type="text" id="first_name" value="" placeholder="First Name" />
-                    <input type="text" id="last_name" value="" placeholder="Last Name" />
+                    <input type="text" id="first_name" value="" class="capitalize" placeholder="First Name" />
+                    <input type="text" id="last_name" value="" class="capitalize" placeholder="Last Name" />
                     <span class="suffix"></span>
                 </label>
                 <label for="birthdate">
@@ -65,12 +65,12 @@
                 </label>
                 <label for="company">
                     <span class="prefix">company<em>current workplace</em></span>
-                    <input type="text" id="company" value="" />
+                    <input type="text" id="company" value="" class="capitalize" />
                     <span class="suffix"></span>
                 </label>
                 <label for="designation">
                     <span class="prefix">designation<em>current designation at work</em></span>
-                    <input type="text" id="designation" value="" />
+                    <input type="text" id="designation" value="" class="capitalize" />
                     <span class="suffix"></span>
                 </label>
             </fieldset>
@@ -78,17 +78,17 @@
                 <legend>Mailing Address</legend>
                 <label for="apartment">
                     <span class="prefix">apartment<em>or building</em></span>
-                    <input type="text" id="apartment" value="" />
+                    <input type="text" id="apartment" value="" class="capitalize" />
                     <span class="suffix"></span>
                 </label>
                 <label for="street_name">
                     <span class="prefix">street name<em>road/street address</em></span>
-                    <input type="text" id="street_name" value="" />
+                    <input type="text" id="street_name" value="" class="capitalize" />
                     <span class="suffix"></span>
                 </label>
                 <label for="landmark">
                     <span class="prefix">landmark<em>nearest prominent landmark</em></span>
-                    <input type="text" id="landmark" value="" />
+                    <input type="text" id="landmark" value="" class="capitalize" />
                     <span class="suffix"></span>
                 </label>
                 <label for="country_code">
@@ -100,23 +100,23 @@
                     </select>
                     <span class="suffix"></span>
                 </label>
+                <label for="state_or_province">
+                    <span class="prefix">state<em>or province</em></span>
+                    <input type="text" id="state_or_province" value="{{ state_or_province }}" class="capitalize" />
+                    <span class="suffix"></span>
+                </label>                
+                <label for="city">
+                    <span class="prefix">city</span>
+                    <input type="text" id="city" value="{{ city }}" class="capitalize" />
+                    <span class="suffix"></span>
+                </label>
                 <label for="nearest_railway_line">
-                    <span class="prefix">nearest railway line<em></em></span>
+                    <span class="prefix">nearest railway line<em>for Mumbai only</em></span>
                     <select id="nearest_railway_line">
                     {% for value, display in railway_lines %}
                         <option value="{{ value }}" {% if default_railway_line_choice == value %}selected="selected"{% end %}>{{ display }}</option>
                     {% end %}
                     </select>
-                    <span class="suffix"></span>
-                </label>
-                <label for="state_or_province">
-                    <span class="prefix">state<em>or province</em></span>
-                    <input type="text" id="state_or_province" value="" />
-                    <span class="suffix"></span>
-                </label>                
-                <label for="city">
-                    <span class="prefix">city</span>
-                    <input type="text" id="city" value="" />
                     <span class="suffix"></span>
                 </label>
                 <label for="timezone">

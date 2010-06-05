@@ -164,6 +164,9 @@ SCRIPT_BUNDLES = (
             script/lib/anytime/anytime.js
             script/lib/anytime/anytimetz.js
             script/lib/livevalidation/livevalidation.js
+            script/lib/chickoojs/src/jquery/alphanumeric/jquery.alphanumeric.js
+            script/lib/chickoojs/src/titleCaps.js
+            script/forms.js
             script/register.js
         """)
     ),

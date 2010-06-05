@@ -17,6 +17,14 @@ jQuery(function(){
 
     AnyTime.picker('birthdate', {format:"%d-%m-%Y"});
 
+    elements.fieldEmail.focus();
+    elements.fieldFirstName.keyup(function(e){
+        if (e.keyCode == 32){
+            elements.fieldLastName.focus();
+            elements.fieldFirstName.change();
+        }
+    });
+
     // Validations
     // Contact fieldset.
     var paramsFieldsetContact = {

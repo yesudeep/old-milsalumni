@@ -12,5 +12,7 @@ jQuery(function(){
 		rotate: true
     });
     
+    jQuery('a.signin').focus();
+    
     jQuery("a[rel^='prettyPhoto']").prettyPhoto();
 });

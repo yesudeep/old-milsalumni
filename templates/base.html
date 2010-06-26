@@ -20,6 +20,18 @@
 		<div id="header">
 		  <div id="nav-content">
 		    {% block tag_nav_content %}
+		    <a href="/" class=""><h1 class="logo-tile"><img src="{{ MEDIA_URL }}image/icon/128x128/text_en_US.png" alt="mils-alumni"></h1></a>
+		    <ul class="navlinks">
+			    {% block tag_navlinks %}
+			    <li><a id="nav_about" href="/about/" title="About"></a></li>
+			    <li><a id="nav_blog" href="/blog" title="Alumni Blog"></a></li>
+			    <li><a id="nav_students_corner" href="/about/" title="About"></a></li>
+			    <li><a id="nav_photos" href="/blog" title="Alumni Blog"></a></li>
+			    <li><a id="nav_announcements" href="/about/" title="About"></a></li>
+			    <li><a id="nav_sponsors" href="/blog" title="Alumni Blog"></a></li>
+			    <li><a id="nav_logout" href="/blog" title="Alumni Blog"></a></li>
+    			{% end %}
+			</ul>
 			{% end %}
 		  </div>
 		  <div id="header-content">		     

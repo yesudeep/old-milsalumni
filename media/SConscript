@@ -62,10 +62,19 @@ IMAGE_FILES = Split("""
     image/openid/yahooB.png
     image/openid/yahooW.png
     
+    image/icon/50x50/about.png
+    image/icon/50x50/announcement.png
+    image/icon/50x50/blog.png
+    image/icon/50x50/logout.png
+    image/icon/50x50/sponsors.png
+    image/icon/50x50/student.png
+    image/icon/50x50/nostalgia.png
+    
     image/icon/128x128/calendar.png
     image/icon/128x128/search-user.png
     image/icon/128x128/suitcase.png
     image/icon/128x128/write-blog.png
+    image/icon/128x128/text_en_US.png
 
     image/logo/mils-alumni.png
     

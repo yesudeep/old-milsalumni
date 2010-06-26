@@ -4,6 +4,14 @@
 
 @import base.sass
 
+//align nav icons
+=align-nav-icon()
+    :display block
+    :width 50px
+    :height 50px
+
+
+
 body
     :background= "transparent" !image_background "scroll repeat-x 0 0"
     :line-height 1.4
@@ -241,37 +249,23 @@ a.signin
                 :margin-right 20px
                 :padding-top 30px
                 #nav_about
-                    :display block
-                    :width 50px
-                    :height 50px
+                    +align-nav-icon()
                     :background= "transparent" !image_about_icon "scroll no-repeat 0 0"
                 #nav_blog
-                    :display block
-                    :width 50px
-                    :height 50px
+                    +align-nav-icon()
                     :background= "transparent" !image_blog_icon "scroll no-repeat 0 0"
                 #nav_students_corner
-                    :display block
-                    :width 50px
-                    :height 50px
+                    +align-nav-icon()
                     :background= "transparent" !image_student_icon "scroll no-repeat 0 0"
                 #nav_photos
-                    :display block
-                    :width 50px
-                    :height 50px
+                    +align-nav-icon()
                     :background= "transparent" !image_photos_icon "scroll no-repeat 0 0"
                 #nav_announcements
-                    :display block
-                    :width 50px
-                    :height 50px
+                    +align-nav-icon()
                     :background= "transparent" !image_announcement_icon "scroll no-repeat 0 0"
                 #nav_sponsors
-                    :display block
-                    :width 50px
-                    :height 50px
+                    +align-nav-icon()
                     :background= "transparent" !image_sponsor_icon "scroll no-repeat 0 0"
                 #nav_logout
-                    :display block
-                    :width 50px
-                    :height 50px
+                    +align-nav-icon()
                     :background= "transparent" !image_logout_icon "scroll no-repeat 0 0"

@@ -85,6 +85,10 @@ IMAGE_FILES = Split("""
     image/picture/8342_d_u_menon.jpg
     image/picture/8477_group.jpg
     
+    image/sponsors/happychickoo.jpg
+    image/sponsors/hypercity.jpg
+    image/sponsors/bizstream.jpg
+    
 """)
 
 CSS_FILES = Split("""
@@ -193,6 +197,8 @@ SCRIPT_BUNDLES = (
         sources = Split(
         COMMON_SCRIPTS +
         """
+            script/lib/chickoojs/src/jquery/jquery-1.4.2.js
+			script/lib/chickoojs/src/jquery/tools/jquery.tools.min.js
             script/sponsors.js
         """)
     ),

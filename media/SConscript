@@ -79,6 +79,11 @@ IMAGE_FILES = Split("""
     image/logo/mils-alumni.png
     
     image/picture/rainbow_shade_tree.jpg
+    image/picture/8260_rupesh_basu.jpg
+    image/picture/8296_devdutt_kadrekar.jpg
+    image/picture/8317_b_s_hegde.jpg
+    image/picture/8342_d_u_menon.jpg
+    image/picture/8477_group.jpg
     
 """)
 
@@ -196,6 +201,8 @@ SCRIPT_BUNDLES = (
         sources = Split(
         COMMON_SCRIPTS +
         """
+            script/lib/chickoojs/src/jquery/jquery-1.4.2.js
+			script/lib/chickoojs/src/jquery/tools/jquery.tools.min.js
             script/about.js
         """)
     ),

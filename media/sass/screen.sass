@@ -293,8 +293,9 @@ div.two-column-layout
         :float left
     .right-column
         +grid(6,16)
-        :border 2px solid blue
         :float left
+        :margin-top 55px
+        :padding-left 50px
 
 //About Page
 
@@ -317,5 +318,38 @@ div.two-column-layout
     img
         border: 6px solid white
         +box-shadow(1px 1px 8px #444)
-//Articles  
+        
+#alumni_photos
+    :float left
+    :width 350px
+    
+#item_numbers
+    :margin 20px 0px 0px 10px
+    li
+        +display-inline-block
+        :margin-right 10px
+        a
+            :background-color #104E8B
+            :padding 5px 10px
+            :color white
+            :border 1px solid silver
+        a:hover
+            :background-color #033d79
+        a.current
+            :background-color #3477bc
+            :border 1px solid #033d79
 
+#items
+    :width 2000px
+    li
+        :display none
+        :min-height 300px
+        :float left
+        img
+            :height 300px
+            :width 300px
+            :margin 10px
+            :border 4px solid white
+            +box-shadow(1px 1px 8px #444)            
+
+//Articles  

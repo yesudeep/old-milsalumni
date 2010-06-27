@@ -160,6 +160,21 @@ class ApiTimezonesForCountryCodeHandler(BaseRequestHandler):
             memcache.set(cache_key, timezones)
         self.set_header('Content-Type', 'application/json')
         self.write(json.dumps(timezones))
+        
+class StudentsHandler(BaseRequestHandler):
+    @login_required
+    def get(self):
+        self.render('students_corner.html', logout_url=users.create_logout_url('/'))
+        
+class AnnouncementsHandler(BaseRequestHandler):
+    @login_required
+    def get(self):
+        self.render('announcements.html', logout_url=users.create_logout_url('/'))
+        
+class SponsorsHandler(BaseRequestHandler):
+    @login_required
+    def get(self):
+        self.render('sponsors.html', logout_url=users.create_logout_url('/'))
 
 # Workers
 class WorkerMailActivateAccountHandler(BaseRequestHandler):
@@ -189,6 +204,10 @@ urls = (
     (r'/logout/?', LogoutHandler),
     (r'/_ah/login_required', LoginHandler),
     (r'/about/?', AboutHandler),
+    (r'/students/?', StudentsHandler),
+    (r'/training_announcements/?', AnnouncementsHandler),
+    (r'/sponsors/?', SponsorsHandler),
+    
     
     # Api
     (r'/_api/timezones/country/(.*)/?', ApiTimezonesForCountryCodeHandler),

@@ -166,6 +166,38 @@ SCRIPT_BUNDLES = (
         """)
     ),
     dict(
+        selector="students_corner.js",
+        sources = Split(
+        COMMON_SCRIPTS +
+        """
+            script/students_corner.js
+        """)
+    ),
+    dict(
+        selector="announcements.js",
+        sources = Split(
+        COMMON_SCRIPTS +
+        """
+            script/announcements.js
+        """)
+    ),
+    dict(
+        selector="sponsors.js",
+        sources = Split(
+        COMMON_SCRIPTS +
+        """
+            script/sponsors.js
+        """)
+    ),
+    dict(
+        selector="about.js",
+        sources = Split(
+        COMMON_SCRIPTS +
+        """
+            script/about.js
+        """)
+    ),
+    dict(
         selector="register.js",
         sources = Split(
         COMMON_SCRIPTS +

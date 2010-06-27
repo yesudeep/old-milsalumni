@@ -23,6 +23,10 @@ PAGE_TEMPLATE_FILES = Split("""
     blog.html
     login.html
     register.html
+    about.html
+    sponsors.html
+    announcements.html
+    students_corner.html
 """)
 
 BASE_TEMPLATE_FILES = Split("""

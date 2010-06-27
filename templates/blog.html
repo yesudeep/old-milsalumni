@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 
+{% block tag_header_additional_content %}
+    <h1 class="page-title">Meet. Belong. Collaborate.</h1>
+    <h2 class="page_subtitle">Time for some coffee with old friends.</h2>
+
+{% end %}
+
 {% block tag_trunk_content %}
 <a href="{{ logout_url }}">Logout</a>    
 {% end %}

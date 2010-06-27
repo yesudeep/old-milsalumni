@@ -78,6 +78,8 @@ IMAGE_FILES = Split("""
 
     image/logo/mils-alumni.png
     
+    image/picture/rainbow_shade_tree.jpg
+    
 """)
 
 CSS_FILES = Split("""

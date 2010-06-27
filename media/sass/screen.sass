@@ -10,13 +10,10 @@
     :width 50px
     :height 50px
 
-
-
 body
     :background= "transparent" !image_background "scroll repeat-x 0 0"
     :line-height 1.4
     :font-family= !font_stack_georgia
-
 
 a
     :color= !color_link
@@ -85,7 +82,6 @@ form.decorated-fields
         :color= !color_awesome_magenta
     fieldset
         :margin-top 1.4em
-
 
 a.signin
     :display block
@@ -182,7 +178,26 @@ a.signin
                     :color white
                     :background-color #556e7a
 
+h1.page-title
+    :font-weight normal
+    :font-size 2.6em
+    :letter-spacing -0.03em
+    :padding-top 15px
+    :color = !color_page_title
+    :clear both
+    :line-height 1.5
+    
+h2.page-subtitle
+    :font-size 1.4em
+    :color = !color_page_subtitle
+    :line-height 1.5
 
+
+.courtesy
+    :font-style italic
+    :font-size 0.8em
+    :color #555
+    
 #trunk-content, #footer-content
     +grid-container()
 
@@ -196,7 +211,6 @@ a.signin
 #footer
     :padding-top 40px
     :display block
-
 
 #footer-content
     :font-size 0.9em
@@ -271,18 +285,37 @@ a.signin
                 #nav_logout
                     +align-nav-icon()
                     :background= "transparent" !image_logout_icon "scroll no-repeat 0 0"
-//Articles     
-h1.page-title
-    :font-weight normal
-    :font-size 2.6em
-    :letter-spacing -0.03em
-    :padding-top 50px
-    :color = !color_page_title
+
+div.two-column-layout
+    +grid-container()
+    .left-column
+        +grid(9,16)
+        :float left
+    .right-column
+        +grid(6,16)
+        :border 2px solid blue
+        :float left
+
+//About Page
+
+.about-content
+    :float left
     :clear both
-    :line-height 1.5
-    
-h2.page-subtitle
-    :font-size 1.4em
-    :color = !color_page_subtitle
-    :line-height 1.5
+    :width 600px
+    h1
+        :font-family = !font_stack_helvetica_ultralight
+        :font-weight normal
+        :font-size 2.0em
+        :line-height 1.5
+        :letter-spacing 0em
+    h2
+        :color #000000
+        :font-size 1.6em
+        :font-weight normal
+        :line-height 1.5
+        :margin-top 1.4em
+    img
+        border: 6px solid white
+        +box-shadow(1px 1px 8px #444)
+//Articles  
 

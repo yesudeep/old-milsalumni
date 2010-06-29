@@ -1,5 +1,5 @@
 application: mils-alumni
-version: development
+version: moving-repo
 runtime: python
 api_version: 1
 

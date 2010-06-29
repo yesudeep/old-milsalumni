@@ -85,7 +85,7 @@ class LogoutHandler(BaseRequestHandler):
 
 
 class BlogHandler(BaseRequestHandler):
-    @login_required
+    #@login_required
     def get(self):
         self.render('blog.html', logout_url=users.create_logout_url('/'))
 
@@ -142,7 +142,7 @@ class ProfileHandler(BaseRequestHandler):
 
 
 class AboutHandler(BaseRequestHandler):
-    @login_required
+    #@login_required
     def get(self):
         self.render('about.html', logout_url=users.create_logout_url('/'))
 
@@ -162,17 +162,17 @@ class ApiTimezonesForCountryCodeHandler(BaseRequestHandler):
         self.write(json.dumps(timezones))
         
 class StudentsHandler(BaseRequestHandler):
-    @login_required
+    #@login_required
     def get(self):
         self.render('students_corner.html', logout_url=users.create_logout_url('/'))
         
 class AnnouncementsHandler(BaseRequestHandler):
-    @login_required
+    #@login_required
     def get(self):
         self.render('announcements.html', logout_url=users.create_logout_url('/'))
         
 class SponsorsHandler(BaseRequestHandler):
-    @login_required
+    #@login_required
     def get(self):
         self.render('sponsors.html', logout_url=users.create_logout_url('/'))
 

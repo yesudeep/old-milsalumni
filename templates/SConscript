@@ -27,10 +27,13 @@ PAGE_TEMPLATE_FILES = Split("""
     sponsors.html
     announcements.html
     students_corner.html
+    
+    adminindex.html
 """)
 
 BASE_TEMPLATE_FILES = Split("""
     base.html
+    adminbase.html
 """)
 
 # If the template does not use scripts, please place it here.

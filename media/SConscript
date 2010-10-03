@@ -169,6 +169,14 @@ SCRIPT_BUNDLES = (
         """)
     ),
     dict(
+        selector="adminindex.js",
+        sources = Split(
+        COMMON_SCRIPTS +
+        """
+            script/adminindex.js
+        """)
+    ),
+    dict(
         selector="blog.js",
         sources = Split(
         COMMON_SCRIPTS +

@@ -30,9 +30,16 @@ from google.appengine.api import users, memcache
 from google.appengine.ext import db, ereporter
 from google.appengine.ext.webapp.util import run_wsgi_app, login_required
 from tornado.wsgi import WSGIApplication
-from utils import BaseRequestHandler, SessionRequestHandler, send_mail_once
-from models import Profile
+from utils import BaseRequestHandler, SessionRequestHandler, send_mail_once, STATIC_PAGE_CACHE_TIMEOUT
+from models import Profile, User
 from countries import COUNTRY_ISO_ALPHA_TABLE, COUNTRIES_LIST
+
+
+####################### Import from version 1 ########################
+from models import BLOG_YEAR_LIST, MONTH_LIST
+######################################################################
+
+
 try:
     import json
 except ImportError:
@@ -55,9 +62,31 @@ class IndexHandler(BaseRequestHandler):
         else:
             if '@' in username:
                 username = username[:username.find('@')]
-            self.render('adminindex.html', 
-                video_url=configuration.INTRO_VIDEO_URL, 
+            
+            #memcache.set(cache_key, 'response', STATIC_PAGE_CACHE_TIMEOUT)
+            
+            self.render('adminindex.html',
+                page_name='dashboard',
+                username=username,
+                blog_year_list=BLOG_YEAR_LIST,
+                month_list=MONTH_LIST, 
                 login_url='/login')
+                
+class UsersHandler(BaseRequestHandler):
+    def get(self):
+        self.render('adminusers.html',
+                page_name='users',
+                user_count=User.get_user_count(), 
+                login_url='/login',
+                page_description='Approving, editing, and sending messages to users is easy.  Just click on a name to perform any of these operations.'
+                )
+                
+class LogoutHandler(BaseRequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user:
+            self.redirect(users.create_logout_url('/admin'))
+        
 
 settings = {
     'debug': configuration.DEBUG,
@@ -66,7 +95,10 @@ settings = {
 }
 
 urls = (
-    (r'/admin', IndexHandler),
+    (r'/admin/?', IndexHandler),
+    (r'/admin/logout/?', LogoutHandler),
+    (r'/admin/users/?', UsersHandler),
+    
 )
 
 application = WSGIApplication(urls, **settings)

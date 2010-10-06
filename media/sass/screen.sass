@@ -1,6 +1,8 @@
-//@import awesome-form.sass
+@import awesome-form.sass
+@import awesome-button.sass
 @import openid.sass
 @import prettyPhoto.sass
+@import accordion.sass
 
 @import base.sass
 
@@ -10,6 +12,23 @@
     :width 50px
     :height 50px
 
+//awesome-tab missing mixins    
+=border-top-right-radius(!radius)
+    -moz-border-radius-topright= !radius
+    -webkit-border-top-right-radius= !radius
+
+=border-top-left-radius(!radius)
+    -moz-border-radius-topleft= !radius
+    -webkit-border-top-left-radius= !radius
+
+=border-bottom-left-radius(!radius)
+    -moz-border-radius-bottomleft= !radius
+    -webkit-border-bottom-left-radius= !radius
+
+=border-bottom-right-radius(!radius)
+    -moz-border-radius-bottomright= !radius
+    -webkit-border-bottom-right-radius= !radius
+    
 body
     :background= "transparent" !image_background "scroll repeat-x 0 0"
     :line-height 1.4
@@ -403,4 +422,96 @@ h1.bird-eye-view
     em
         :font-style italic 
 
-//Articles  
+//Admin page styling TODO: move this to admin.sass
+section > div > h1
+    :font-family= !font_stack_helvetica
+    :font-size 1.9em
+    :font-weight bold
+    :color black
+    :line-height 1.4
+    :letter-spacing -0.03em
+section > div > h2c
+    :font-family= !font_stack_helvetica
+    :font-size 1em
+    :font-weight normal
+    :line-height 1.2
+    :color gray
+    :margin-bottom 30px
+
+#header-content
+    :background-color #00131E
+    :color #337799
+    :min-height 40px
+    ul
+        :width 960px
+        :margin 0px auto
+        :font-variant small-caps
+        li
+            :line-height 1.5
+            :float right
+
+#admin_wrapper
+    :font-family= !font_family_serif
+    :color = !color_admin_bg_wrapper
+
+#notification
+    :opacity 0.8
+    :width 500px
+    :min-height 50px
+    :background-color = !color_admin_bg_notification
+    :display none
+
+#admin_header
+    :background-color = !color_admin_bg_header
+    :color = !color_admin_header
+    :min-height 40px
+    ul
+        :width 960px
+        :margin 0px auto
+        :font-variant small-caps
+        li
+            :line-height 1.5
+            :float right
+            
+#admin_wrapper > #nav
+    :padding-top 40px
+    :background-color = !color_admin_bg
+    :border-bottom 1px solid !color_admin_nav_border
+    >ul
+        +grid-container()
+        >li
+            +display-inline-block()
+            //:margin-right 5px
+            :font-family= !font_family_sans_serif
+            :font-size 0.9em
+            >a, >a:link, >a:visited
+                +awesome-top-tab()
+                :font-weight bold
+                :color= !color_white
+
+#trunk_content
+    > h1
+        :text-transform capitalize
+    > h2
+        :line-height 1.5
+
+footer
+    :min-height 100px
+    :width 960px
+    :margin 40px auto
+    :color #666
+    > nav
+        :border-top 1px solid #dedede
+        > ul
+            >li
+                :margin-left 10px
+                :font-family= !font_family_sans_serif
+                :font-size 0.8em
+                +display-inline-block()
+
+
+.data-list
+    +accordion
+
+    
+

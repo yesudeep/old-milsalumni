@@ -32,6 +32,50 @@ from pytz.gae import pytz
 from countries import ISO_ALPHA_3_CODES
 from aetycoon import DerivedProperty
 
+################ Imported from version 1 of the code #############
+from datetime import datetime
+from data import countries, calendar
+
+current_year = datetime.utcnow().year
+
+BLOG_START_YEAR = 2009
+BLOG_YEAR_LIST = range(BLOG_START_YEAR, current_year + 1)
+MONTH_LIST = calendar.MONTH_NAMES
+
+class User(SerializableModel):
+    username = db.StringProperty(required=True)
+    signin_email = db.EmailProperty()
+    email = db.EmailProperty(required=True)
+    corporate_email = db.EmailProperty()
+    nickname = db.StringProperty()
+    identifier = db.StringProperty(required=True)
+    photo = db.URLProperty()
+    auth_provider = db.StringProperty()
+    
+    # Preferences
+    enable_notifications = db.BooleanProperty(default=True)
+    enable_administrator_contact = db.BooleanProperty(default=True)
+    enable_public_profile = db.BooleanProperty(default=True)
+    
+    # Flags
+    wants_activation = db.BooleanProperty(default=False)
+    has_updated_profile = db.BooleanProperty(default=False)
+    #has_received_email_thank_you_for_registering = db.BooleanProperty(default=False)
+    #is_premium_user = db.BooleanProperty(default=False)
+    is_premium = db.BooleanProperty(default=False)
+    #is_rejected = db.BooleanProperty(default=False)
+    
+    def __str__(self):
+        return 'username: %s, nickname: %s, email: %s, identifier: %s, auth_provider: %s' % (self.username, self.nickname, self.email, self.identifier, self.auth_provider)
+    
+    @classmethod
+    def get_user_count(cls):
+        return 1
+        
+    
+
+    
+###################################################################
 TIMEZONE_CHOICES = pytz.all_timezones
 DEFAULT_TIMEZONE_CHOICE = configuration.DEFAULT_TIMEZONE
 

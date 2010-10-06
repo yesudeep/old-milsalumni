@@ -43,11 +43,13 @@ from datetime import datetime
 from functools import partial
 from urllib import urlencode
 
+
 logging.basicConfig(level=logging.DEBUG)
 
 EMAIL_SENDER = configuration.NOREPLY_EMAIL
 EMAIL_REPLY_TO = configuration.SUPPORT_EMAIL
 
+STATIC_PAGE_CACHE_TIMEOUT = 15   # half an hour.
 
 # Conveninence wrapper to make sure int conversion uses a decimal base.
 dec = partial(int, base=10)

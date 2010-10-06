@@ -1,0 +1,19 @@
+{% extends "adminindex.html" %}
+
+
+{% block tag_section_content %}
+<h1>{{ page_name }}</h1>
+<h2>{{ page_description }}</h2>
+
+<a class="awesome-button {{ page_name }}" rel="new" href="/api/{{ page_name }}/new">+ Add new</a>
+<div id="new-item"></div>
+<ul id="data-list" class="data-list"></ul>
+{% end %}
+
+{% block tag_scripts_base %}
+<script type="text/javascript">
+window.__hc_scripts = [];
+</script>
+{% end %}
+
+{% block tag_scripts %}<script type="text/javascript">$SELECTOR_SCRIPT</script>{% end %}

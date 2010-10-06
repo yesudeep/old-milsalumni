@@ -1,7 +1,27 @@
 {% extends "adminbase.html" %}
 
-{% block tag_trunk_content %}
-some content
+
+{% block tag_nav_content %}
+    <ul>
+        <li>
+            <a {% if page_name == 'users' %}class="active"{% end %} id="nav_users" href="/admin/users/">Users 
+        
+            #*<!--TODO: fix the upper person count, gives dome issue.-->*#
+            #*
+            <!--
+            {% if user_count %}({{ user_count }}; active: {{ approved_user_count - deleted_user_count }}; &#10004;: {{ approved_user_count }}; &times;: {{ deleted_user_count }}){% end %}
+            -->
+            *#
+            </a>
+        </li>
+        <li><a {% if page_name == 'articles' %}class="active"{% end %} id="nav_articles" href="/admin/articles/">Blog Articles</a></li>
+        <li><a {% if page_name == 'books' %}class="active"{% end %} id="nav_books" href="/admin/books/">Books</a></li>
+        <li><a {% if page_name == 'announcements' %}class="active"{% end %} id="nav_announcements" href="/admin/announcements/">Event Announcements</a></li>
+    </ul>
+{% end %}
+
+{% block tag_section_content %}
+
 {% end %}
 
 {% block tag_scripts_base %}

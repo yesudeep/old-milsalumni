@@ -29,6 +29,7 @@ PAGE_TEMPLATE_FILES = Split("""
     students_corner.html
     
     adminindex.html
+    adminusers.html
 """)
 
 BASE_TEMPLATE_FILES = Split("""

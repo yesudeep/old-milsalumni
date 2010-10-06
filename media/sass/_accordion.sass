@@ -1,0 +1,150 @@
+=border-top-left-radius(!radius)
+    -moz-border-radius-topleft= !radius
+    -webkit-border-top-left-radius= !radius
+
+=border-top-right-radius(!radius)
+    -moz-border-radius-topright= !radius
+    -webkit-border-top-right-radius= !radius
+    
+=accordion-magic()
+    >li
+        >h1:before
+            :content ''
+=accordion-styles()
+    :margin-top 10px
+    :margin-bottom 10px
+    >li:nth-child(2n)
+        :background-color #efefef
+    >li:nth-child(2n):hover, > li.active:nth-child(2n)
+        :background-color white
+    >li
+        // We're setting least margin here to avoid usability issues.
+        // Negative margin creates a "depth" overlapping effect.
+        :margin-top 0px
+        :background-color white
+        :cursor default
+        //:border-top 1px solid #efefef
+        +border-radius(10px)
+        :border 1px solid #efefef
+        //+box-shadow(0px 0px 4px rgba(0, 0, 0, 0.4))
+        > div
+            :padding 10px 10px 20px 10px
+            :min-height 150px
+        > h1
+            :border 0
+            :font-family= !font_stack_trebuchet
+            :font-size 0.9em
+            :font-weight normal
+            :padding 8px
+            :cursor pointer
+            :color black
+            //:text-shadow 0 1px 1px rgba(255, 255, 255, 0.9)
+            +border-radius(10px)
+            > span.actions
+                :font-size 0.7em
+            > span.title
+                :color black
+            > span.tags
+                :display inline
+                :margin-left 15px
+                > a
+                    :font-weight bold
+                    :font-family= !font_stack_verdana
+                    :text-shadow 0px -1px 1px rgba(0, 0, 0, 0.5)
+                    :background-color #ccc
+                    :color white
+                    :font-weight bold
+                    :font-size 0.7em
+                    :padding 2px 8px
+                    :margin-left 5px
+                    +border-radius(10px)
+                    +display-inline-block
+
+        // Behavior
+        > h1
+            > span.tags
+                > a
+                    :display none
+            > span.actions
+                :display none
+                > a
+                    +display-inline-block
+                > a[rel="delete"]
+                    +display-inline-block
+                > a[rel="undelete"]
+                    :display none
+                > a[rel="approve"]
+                    :display none
+                > a[rel="unapprove"]
+                    +display-inline-block
+        > h1.deleted
+            > span.title
+                :text-decoration line-through
+                :font-style italic
+                :color #999
+            > span.actions
+                > a[rel="delete"]
+                    :display none
+                > a[rel="undelete"]
+                    +display-inline-block
+        //> h1.canceled
+            > span.title
+                :text-decoration line-through
+                :font-style italic
+                :color #999
+            > span.actions
+                > a[rel="cancel-announcement"]
+                    :display none
+        > h1.starred
+            > span.tags
+                > a[href="#starred"]
+                    :background-color= !color_awesome_red
+                    +display-inline-block
+        > h1.unapproved
+            > span.tags
+                > a[href="#unapproved"]
+                    :background-color= !color_awesome_green
+                    +display-inline-block
+            > span.actions
+                > a[rel="approve"]
+                    +display-inline-block
+                > a[rel="unapprove"]
+                    :display none
+
+    >li:hover, > li.active
+        //:border-top 0px
+        :border 1px solid !color_awesome_magenta
+        > h1
+            :font-family= !font_stack_trebuchet
+            :font-weight bold
+            //:background= !color_awesome_magenta !image_button_overlay "repeat-x scroll 0 0"
+            :background-color= !color_awesome_magenta
+            :color white
+            //:text-shadow 0 1px 1px rgba(0, 0, 0, 0.4)
+            :font-size 1.4em
+            > span.title
+                :color white
+            > span.tags
+                :display none
+            > span.actions
+                :margin-top 15px
+                :font-size 0.7em
+                :display block
+    >li.active
+        >h1
+            +border-bottom-left-radius(0px)
+            +border-bottom-right-radius(0px)
+
+=accordion-behavior()
+    >li
+        >div
+            :display none
+    //>li:hover, >li.active
+    >li.active
+        >div
+            :display block
+
+=accordion()
+    +accordion-behavior
+    +accordion-styles
+    +accordion-magic

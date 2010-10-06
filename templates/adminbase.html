@@ -14,52 +14,59 @@
 
 {% block tag_body %}
 	{% block tag_wrapper %}
-	<div id="wrapper">
+	<div id="admin_wrapper">
 		{% block tag_wrapper_content %}
 		{% block tag_header %}
-		<div id="header">
-		  <div id="nav-content">
-		    {% block tag_nav_content %}
-		    <ul class="navlinks">
-			    {% block tag_navlinks %}
-    			{% end %}
-			</ul>
-			{% end %}
-		  </div>
-		  <div id="header-content">		     
-		    {% block tag_header_content %}
-		    {% end %}
-				{% block tag_header_additional_content %}
-				{% end %}	
-	    </div>	
-    </div>
+		<div id="admin_header">
+            <div id="header-content">		     
+            {% block tag_header_content %}
+                <ul>
+                    <li><a href="/admin/logout">Logout</a></li>
+                </ul>
+
+                <div id="notification">
+                  <h1 id="notification-title">Saving information</h1>
+                  <div id="notification-content">
+                    <p>Please wait while we synchronize information with the servers...</p>
+                  </div>
+                </div>
+            {% end %}
+            {% block tag_header_additional_content %}
+            {% end %}	
+            </div>	
+        </div>  
 		{% end %}
-		{% block tag_trunk %}
-		<div id="trunk">
-			<div id="trunk-content">
-			{% block tag_trunk_content %}
-			{% end %}
-			</div>
-		</div>
-		{% end %}
-		{% block tag_footer %}
-		<div id="footer">
-			<div id="footer-content">
-			{% block tag_footer_content %}
-                <nav>
-                    <ul>
-                        <li>Copyright &copy; 2009 happychickoo.</li>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/blog">Blog</a></li>
-                        <li><a href="/admin/">Admin</a></li>
-                        <li><a href="mailto:support@happychickoo.com">Report a Problem</a></li>
-                    </ul>
-                </nav>
-			{% end %}
-      </div>
-		</div>
-		{% end %}
-		{% end %}
+        {% block tag_nav %}
+            <div id="nav">
+            {% block tag_nav_content %}
+            {% end %}
+            </div>
+        {% end %}
+	    {% block tag_section %}
+        <section id="trunk">
+            <div id="trunk_content">
+            {% block tag_section_content %}
+            {% end %}
+            </div>
+        </section>
+        {% end %}
+        {% block tag_footer %}
+        <footer>
+            {% block tag_footer_content %}
+            {% end %}
+            <nav>
+                <ul>
+                    <li>Copyright &copy; 2009 happychickoo.</li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/admin/">Admin</a></li>
+                    <li><a href="mailto:support@happychickoo.com">Report a Problem</a></li>
+                </ul>
+            </nav>
+        </footer>
+        {% end %}
+    
+	{% end %}
 	</div>
 	{% end %}
 {% end %}

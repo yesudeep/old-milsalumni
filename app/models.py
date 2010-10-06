@@ -35,6 +35,7 @@ from aetycoon import DerivedProperty
 ################ Imported from version 1 of the code #############
 from datetime import datetime
 from data import countries, calendar
+from cached_counter import CachedCounter as Counter
 
 current_year = datetime.utcnow().year
 
@@ -70,9 +71,116 @@ class User(SerializableModel):
     
     @classmethod
     def get_user_count(cls):
-        return 1
+        return Counter('User.user_count').count
         
-    
+    @classmethod
+    def set_user_count(cls, count):
+        Counter('User.user_count').count = count
+    #user_count = property(get_user_count, set_user_count)
+
+    @classmethod
+    def increment_user_count(cls, incr=1):
+        Counter('User.user_count').incr(value=incr)
+
+    @classmethod
+    def decrement_user_count(cls):
+        user_count = Counter('User.user_count')
+        if user_count.count > 0:
+            user_count.incr(value=-1)
+
+    # Approved participants count
+    @classmethod
+    def get_approved_user_count(cls):
+        return Counter('User.approved_user_count').count
+
+    @classmethod
+    def set_approved_user_count(cls, count):
+        Counter('User.approved_user_count').count = count
+
+    @classmethod
+    def increment_approved_user_count(cls, incr=1):
+        Counter('User.approved_user_count').incr(value=incr)
+
+    @classmethod
+    def decrement_approved_user_count(cls):
+        user_count = Counter('User.approved_user_count')
+        if user_count.count > 0:
+            user_count.incr(value=-1)
+
+
+    # deleted participants count
+    @classmethod
+    def get_deleted_user_count(cls):
+        return Counter('User.deleted_user_count').count
+
+    @classmethod
+    def set_deleted_user_count(cls, count):
+        Counter('User.deleted_user_count').count = count
+
+    @classmethod
+    def increment_deleted_user_count(cls, incr=1):
+        Counter('User.deleted_user_count').incr(value=incr)
+
+    @classmethod
+    def decrement_deleted_user_count(cls):
+        user_count = Counter('User.deleted_user_count')
+        if user_count.count > 0:
+            user_count.incr(value=-1)
+    @classmethod
+    def purge_deleted(cls):
+        db.delete(db.Query(User).filter('is_deleted', True))
+
+    @classmethod
+    def get_all_by_filter(cls, filter_name):
+        cache_key = 'User.get_all_by_filter.' + filter_name
+        users = memcache.get(cache_key)
+        if not users:
+            #condition = filters.get(filter_name, None)
+            if filter_name == 'approved':
+                users = db.Query(User).filter('is_active =', True).filter('is_deleted =', False)
+            elif filter_name == 'registered':
+                users = db.Query(User).filter('is_active =', False).filter('is_deleted =', False)
+            elif filter_name == 'deleted':
+                users = db.Query(User).filter('is_deleted =', True)
+            elif filter_name == 'none':
+                users = []
+            else:
+                users = db.Query(User)
+            if users:
+                users = users.fetch(FETCH_ALL_VALUES)
+            memcache.set(cache_key, users)
+        return users
+
+    @classmethod
+    def get_all(cls):
+        cache_key = 'User.get_all'
+        users = memcache.get(cache_key)
+        if not users:
+            users = db.Query(User).order('-when_created').order('nickname').fetch(FETCH_ALL_VALUES)
+            memcache.set(cache_key, users, 15)
+        return users
+
+    @classmethod
+    def get_user_from_identifier(cls, identifier):
+        cache_key = ''.join(['User.get_user_from_identifier(', identifier, ')'])
+        cached_user = memcache.get(cache_key)
+        if cached_user is not None:
+            return cached_user
+        else:
+            user = db.Query(User).filter('identifier', identifier).get()
+            memcache.set(cache_key, user, ONE_MINUTE)
+            return user
+
+    @classmethod
+    def get_user_from_email_and_identifier(cls, email, identifier):
+        cache_key = ''.join(['User.get_user_from_email_and_identifier(', email, ' ,', identifier, ')'])
+        cached_user = memcache.get(cache_key)
+        if cached_user is not None:
+            return cached_user
+        else:
+            user = db.Query(User).filter('email', email).filter('identifier', identifier).get()
+            memcache.set(cache_key, user, ONE_MINUTE)
+            return user    
 
     
 ###################################################################

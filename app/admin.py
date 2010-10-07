@@ -75,12 +75,65 @@ class IndexHandler(BaseRequestHandler):
 class UsersHandler(BaseRequestHandler):
     def get(self):
         self.render('adminusers.html',
-                page_name='users',
                 user_count=User.get_user_count(), 
+                approved_user_count=User.get_approved_user_count(),
+                user_count=User.get_user_count(), 
+                deleted_user_count=User.get_deleted_user_count(),
+                
+                
+                page_name='users',
                 login_url='/login',
                 page_description='Approving, editing, and sending messages to users is easy.  Just click on a name to perform any of these operations.'
                 )
+
+class ArticlesHandler(BaseRequestHandler):
+    def get(self):
+        self.render('adminusers.html',
+                    page_name = 'articles',
+                    page_description = 'Add, remove, update articles and publish them.',
+
+                    user_count=User.get_user_count(), 
+                    approved_user_count=User.get_approved_user_count(),
+                    user_count=User.get_user_count(), 
+                    deleted_user_count=User.get_deleted_user_count(),
+                    )
+
+class BooksHandler(BaseRequestHandler):
+    def get(self):
+        self.render('adminusers.html',
+                    page_name = 'books',
+                    page_description = 'Add or remove books.',
+                    
+                    user_count=User.get_user_count(), 
+                    approved_user_count=User.get_approved_user_count(),
+                    user_count=User.get_user_count(), 
+                    deleted_user_count=User.get_deleted_user_count(),
+                    )
                 
+class AnnouncementsHandler(BaseRequestHandler):
+    def get(self):
+        self.render('adminusers.html',
+                    page_name = 'announcements',
+                    page_description = 'Create new announcements to send to everyone in the list of users.',
+                    
+                    user_count=User.get_user_count(), 
+                    approved_user_count=User.get_approved_user_count(),
+                    user_count=User.get_user_count(), 
+                    deleted_user_count=User.get_deleted_user_count(),
+                    )
+                
+class MailHandler(BaseRequestHandler):
+    def get(self):
+        self.render('adminusers.html',
+                    page_name = 'mails',
+                    page_description = 'Send mail to people',
+                    
+                    user_count=User.get_user_count(), 
+                    approved_user_count=User.get_approved_user_count(),
+                    user_count=User.get_user_count(), 
+                    deleted_user_count=User.get_deleted_user_count(),
+                    )
+
 class LogoutHandler(BaseRequestHandler):
     def get(self):
         user = users.get_current_user()
@@ -95,9 +148,13 @@ settings = {
 }
 
 urls = (
-    (r'/admin/?', IndexHandler),
+    (r'/admin/?', UsersHandler),
     (r'/admin/logout/?', LogoutHandler),
     (r'/admin/users/?', UsersHandler),
+    (r'/admin/articles/?', ArticlesHandler),
+    (r'/admin/books/?', BooksHandler),
+    (r'/admin/announcements/?', AnnouncementsHandler),
+    (r'/admin/mails/?', MailHandler),
     
 )
 

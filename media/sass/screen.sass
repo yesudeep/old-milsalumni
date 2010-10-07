@@ -489,7 +489,16 @@ section > div > h2c
                 :font-weight bold
                 :color= !color_white
 
-#trunk_content
+#admin-trunk
+    :padding 10px
+    :border-top 1px solid white
+    :border-bottom 1px solid #c6d9e9
+    :background-color #ddeef6
+    div
+        :width 960px
+        :margin 0px auto
+
+#admin-trunk_content
     > h1
         :text-transform capitalize
     > h2
@@ -508,7 +517,6 @@ footer
                 :font-family= !font_family_sans_serif
                 :font-size 0.8em
                 +display-inline-block()
-
 
 .data-list
     +accordion

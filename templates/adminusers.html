@@ -2,11 +2,29 @@
 
 {% block tag_section_content %}
 <h1>{{ page_name }}</h1>
-<h2>{{ page_description }}</h2>
+<h2>Approving, editing, and sending messages to users is easy.  Just click on a name to perform any of these operations.</h2>
 
-<a class="awesome-button {{ page_name }}" rel="new" href="/api/{{ page_name }}/new">+ Add new</a>
+#*<a class="awesome-button {{ page_name }}" rel="new" href="/api/{{ page_name }}/new">+ Add new</a>*#
+
 <div id="new-item"></div>
-<ul id="data-list" class="data-list"></ul>
+<ul id="data-list" class="data-list">
+{% for user in total_user %}
+    <li class="user-card">
+        <h1 class="user-card">
+            {{ user.username }} ({{ user.auth_provider }})
+            <span class="actions">
+                <a rel="approve" href="" class="awesome-button">Approve</a>
+                <a rel="unapprove" href="" class="awesome-button">Unapprove</a>
+                <a rel="delete" href="" class="awesome-button">Delete</a>
+                <a rel="undelete" href="" class="awesome-button">Undelete</a>
+            </span>
+        </h1>
+        <div class="info">{{ user. email}}</p>
+    </li>
+{% end %}
+</ul>
+
+<p>user count : {{ user_count }}</p>
 {% end %}
 
 {% block tag_scripts_base %}

@@ -36,7 +36,7 @@ from countries import COUNTRY_ISO_ALPHA_TABLE, COUNTRIES_LIST
 
 
 ####################### Import from version 1 ########################
-from models import BLOG_YEAR_LIST, MONTH_LIST
+from models import BLOG_YEAR_LIST, MONTH_LIST,User
 ######################################################################
 
 
@@ -50,40 +50,24 @@ logging.basicConfig(level=logging.DEBUG)
 
 ereporter.register_logger()
 
-class IndexHandler(BaseRequestHandler):
-    def get(self):
-        user = users.get_current_user()
-        username = user.nickname()
-        
-        cache_key = 'admin page' + username
-        cached_response = memcache.get(cache_key)
-        if cached_response:
-            self.write('cached response')
-        else:
-            if '@' in username:
-                username = username[:username.find('@')]
-            
-            #memcache.set(cache_key, 'response', STATIC_PAGE_CACHE_TIMEOUT)
-            
-            self.render('adminindex.html',
-                page_name='dashboard',
-                username=username,
-                blog_year_list=BLOG_YEAR_LIST,
-                month_list=MONTH_LIST, 
-                login_url='/login')
-                
 class UsersHandler(BaseRequestHandler):
     def get(self):
+        
+        #getting total, approved and deleted users 
+        TOTAL_USER = User.all()
+        APPROVED_USER = db.GqlQuery("SELECT * FROM User WHERE is_active=True AND is_deleted = False")
+        DELETED_USER = db.GqlQuery("SELECT * FROM User WHERE is_active=False AND is_deleted = True")
+        
         self.render('adminusers.html',
-                user_count=User.get_user_count(), 
-                approved_user_count=User.get_approved_user_count(),
-                user_count=User.get_user_count(), 
-                deleted_user_count=User.get_deleted_user_count(),
-                
+                user_count= TOTAL_USER.count(), 
+                approved_user_count= APPROVED_USER.count(),
+                deleted_user_count= DELETED_USER.count(),
+                total_user = TOTAL_USER,
+                approved_user = APPROVED_USER,
+                deleted_user = DELETED_USER,
                 
                 page_name='users',
                 login_url='/login',
-                page_description='Approving, editing, and sending messages to users is easy.  Just click on a name to perform any of these operations.'
                 )
 
 class ArticlesHandler(BaseRequestHandler):
@@ -91,10 +75,9 @@ class ArticlesHandler(BaseRequestHandler):
         self.render('adminusers.html',
                     page_name = 'articles',
                     page_description = 'Add, remove, update articles and publish them.',
-
-                    user_count=User.get_user_count(), 
+                    
+                    user_count= User.all().count(),
                     approved_user_count=User.get_approved_user_count(),
-                    user_count=User.get_user_count(), 
                     deleted_user_count=User.get_deleted_user_count(),
                     )
 
@@ -104,9 +87,8 @@ class BooksHandler(BaseRequestHandler):
                     page_name = 'books',
                     page_description = 'Add or remove books.',
                     
-                    user_count=User.get_user_count(), 
+                    user_count= User.all().count(),
                     approved_user_count=User.get_approved_user_count(),
-                    user_count=User.get_user_count(), 
                     deleted_user_count=User.get_deleted_user_count(),
                     )
                 
@@ -116,9 +98,8 @@ class AnnouncementsHandler(BaseRequestHandler):
                     page_name = 'announcements',
                     page_description = 'Create new announcements to send to everyone in the list of users.',
                     
-                    user_count=User.get_user_count(), 
+                    user_count= User.all().count(),                    
                     approved_user_count=User.get_approved_user_count(),
-                    user_count=User.get_user_count(), 
                     deleted_user_count=User.get_deleted_user_count(),
                     )
                 
@@ -128,9 +109,7 @@ class MailHandler(BaseRequestHandler):
                     page_name = 'mails',
                     page_description = 'Send mail to people',
                     
-                    user_count=User.get_user_count(), 
                     approved_user_count=User.get_approved_user_count(),
-                    user_count=User.get_user_count(), 
                     deleted_user_count=User.get_deleted_user_count(),
                     )
 

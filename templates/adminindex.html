@@ -6,7 +6,6 @@
         <li>
             <a {% if page_name == 'users' %}class="active"{% end %} id="nav_users" href="/admin/users/">Users 
         
-            #*<!--TODO: fix the upper person count, gives dome issue.-->*#
             {% if user_count %}({{ user_count }}; active: {{ approved_user_count - deleted_user_count }}; &#10004;: {{ approved_user_count }}; &times;: {{ deleted_user_count }}){% end %}
             </a>
         </li>

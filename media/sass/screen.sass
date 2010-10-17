@@ -34,6 +34,10 @@ body
     :line-height 1.4
     :font-family= !font_stack_georgia
 
+body#admin-body
+    :background= "transparent" !image_admin_background "scroll repeat-x 0 0"
+    :line-height 1.4
+    :font-family= !font_stack_georgia
 a
     :color= !color_link
     :text-decoration none
@@ -438,7 +442,7 @@ section > div > h2c
     :color gray
     :margin-bottom 30px
 
-#header-content
+#admin-header-content
     :background-color #00131E
     :color #337799
     :min-height 40px
@@ -498,11 +502,12 @@ section > div > h2c
         :width 960px
         :margin 0px auto
 
-#admin-trunk_content
+#admin-trunk-content
     > h1
         :text-transform capitalize
     > h2
-        :line-height 1.5
+        :line-height 1.5em
+        :font-size 1.1em
 
 footer
     :min-height 100px
@@ -517,9 +522,5 @@ footer
                 :font-family= !font_family_sans_serif
                 :font-size 0.8em
                 +display-inline-block()
-
 .data-list
     +accordion
-
-    
-

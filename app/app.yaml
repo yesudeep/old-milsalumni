@@ -1,4 +1,4 @@
-application: mils-alumni
+application: test-app-aswad
 version: moving-repo
 runtime: python
 api_version: 1

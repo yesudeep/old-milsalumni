@@ -70,10 +70,6 @@ class User(SerializableModel):
         return 'username: %s, nickname: %s, email: %s, identifier: %s, auth_provider: %s' % (self.username, self.nickname, self.email, self.identifier, self.auth_provider)
     
     @classmethod
-    def get_user_count(cls):
-        return Counter('User.user_count').count
-        
-    @classmethod
     def set_user_count(cls, count):
         Counter('User.user_count').count = count
     #user_count = property(get_user_count, set_user_count)

@@ -10,21 +10,43 @@
 <ul id="data-list" class="data-list">
 {% for user in total_user %}
     <li class="user-card">
-        <h1 class="user-card">
+        <h1 class="user-card starred unapproved deleted">
+            {% if user.is_deleted %}
+            <span class="title">{{ user.username }} ({{ user.auth_provider }})</span>
+            {% elif user.is_starred%}
             {{ user.username }} ({{ user.auth_provider }})
+            <span class="tags"><a href="#starred">important</a></span>
+            {% else %}
+            {{ user.username }} ({{ user.auth_provider }})
+            {% end %}
+            
+            {% if not user.is_active %}<span class="tags"><a href="#unapproved">not approved</a></span>{% end %}
             <span class="actions">
-                <a rel="approve" href="" class="awesome-button">Approve</a>
-                <a rel="unapprove" href="" class="awesome-button">Unapprove</a>
-                <a rel="delete" href="" class="awesome-button">Delete</a>
-                <a rel="undelete" href="" class="awesome-button">Undelete</a>
+                {% if user.is_starred %}
+                <a rel="default" href="/admin/unstar/{{ user.key() }}" class="unstar"></a>
+                {% else %}
+                <a rel="default" href="/admin/star/{{ user.key() }}" class="star"></a>
+                {% end %}
+                {% if not user.is_active %}
+                <a rel="default" href="/admin/approve/{{ user.key() }}" class="awesome-button">Approve</a>
+                {% end %}
+                {% if user.is_active %}
+                <a rel="default" href="/admin/unapprove/{{ user.key() }}" class="awesome-button">Unapprove</a>
+                {% end %}
+                <a rel="default" href="/admin/edit/{{ user.key() }}" class="awesome-button">Edit Profile</a>
+                {% if not user.is_deleted %}
+                <a rel="default" href="/admin/delete/{{ user.key() }}" class="awesome-button">Delete</a>
+                {% end %}
+                {% if user.is_deleted %}
+                <a rel="default" href="/admin/undelete/{{ user.key() }}" class="awesome-button">Undelete</a>
+                {% end %}
             </span>
         </h1>
-        <div class="info">{{ user. email}}</p>
+        <div class="info">{{ user. email}}</div>
     </li>
 {% end %}
 </ul>
 
-<p>user count : {{ user_count }}</p>
 {% end %}
 
 {% block tag_scripts_base %}

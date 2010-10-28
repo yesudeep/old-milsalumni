@@ -76,6 +76,8 @@ IMAGE_FILES = Split("""
     image/icon/128x128/write-blog.png
     image/icon/128x128/text_en_US.png
 
+    image/icon/icon/star.png    
+    
     image/logo/mils-alumni.png
     
     image/picture/rainbow_shade_tree.jpg

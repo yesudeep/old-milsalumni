@@ -498,6 +498,7 @@ section > div > h2c
     :border-top 1px solid white
     :border-bottom 1px solid #c6d9e9
     :background-color #ddeef6
+    :min-height 35em
     div
         :width 960px
         :margin 0px auto
@@ -509,7 +510,7 @@ section > div > h2c
         :line-height 1.5em
         :font-size 1.1em
 
-footer
+#adminfooter
     :min-height 100px
     :width 960px
     :margin 40px auto
@@ -524,3 +525,25 @@ footer
                 +display-inline-block()
 .data-list
     +accordion
+    
+a.star
+    :background= "transparent" !url_star_icon "no-repeat scroll 0 0"
+    :display block
+    :width 16px
+    :height 16px
+    :float left
+    :margin-right 8px
+a.star:link, a.star:visited
+    :background-position 0 0
+a.star:hover, a.star:visited:hover
+    :background-position 0 -16px
+    
+a.unstar
+    :background= "transparent" !url_star_icon "no-repeat scroll 0 -32px"
+    :display block
+    :width 16px
+    :height 16px
+    :float left
+    :margin-right 8px
+a.unstar:hover, a.unstar:visited:hover
+    :background-position 0 -48px

@@ -52,6 +52,7 @@ ereporter.register_logger()
 
 class UsersHandler(BaseRequestHandler):
     def get(self):
+        #User(username='Aswad', email='aswad.r@gmail.com', identifier='Google').put()
         
         #getting total, approved and deleted users 
         TOTAL_USER = User.all()
@@ -70,6 +71,48 @@ class UsersHandler(BaseRequestHandler):
                 login_url='/login',
                 )
 
+class ApproveUsersHandler(BaseRequestHandler):
+    def get(self,key):
+        user = User.get(key)
+        user.is_active = True
+        user.put()
+        self.redirect('/admin')
+
+class UnapproveUsersHandler(BaseRequestHandler):
+    def get(self,key):
+        user = User.get(key)
+        user.is_active = False
+        user.put()
+        self.redirect('/admin')
+        
+class DeleteUsersHandler(BaseRequestHandler):
+    def get(self,key):
+        user = User.get(key)
+        user.is_deleted = True
+        user.put()
+        self.redirect('/admin')
+        
+class UndeleteUsersHandler(BaseRequestHandler):
+    def get(self,key):
+        user = User.get(key)
+        user.is_deleted = False
+        user.put()
+        self.redirect('/admin')  
+        
+class StarUsersHandler(BaseRequestHandler):
+    def get(self,key):
+        user = User.get(key)
+        user.is_starred = True
+        user.put()
+        self.redirect('/admin')      
+
+class UnstarUsersHandler(BaseRequestHandler):
+    def get(self,key):
+        user = User.get(key)
+        user.is_starred = False
+        user.put()
+        self.redirect('/admin')
+        
 class ArticlesHandler(BaseRequestHandler):
     def get(self):
         self.render('adminusers.html',
@@ -128,8 +171,16 @@ settings = {
 
 urls = (
     (r'/admin/?', UsersHandler),
-    (r'/admin/logout/?', LogoutHandler),
     (r'/admin/users/?', UsersHandler),
+    (r'/admin/logout/?', LogoutHandler),
+
+    (r'/admin/approve/(.*)', ApproveUsersHandler),
+    (r'/admin/unapprove/(.*)', UnapproveUsersHandler),
+    (r'/admin/delete/(.*)', DeleteUsersHandler),
+    (r'/admin/undelete/(.*)', UndeleteUsersHandler),
+    (r'/admin/star/(.*)', StarUsersHandler),
+    (r'/admin/unstar/(.*)', UnstarUsersHandler),
+
     (r'/admin/articles/?', ArticlesHandler),
     (r'/admin/books/?', BooksHandler),
     (r'/admin/announcements/?', AnnouncementsHandler),

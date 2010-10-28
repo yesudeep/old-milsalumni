@@ -7,7 +7,7 @@
 #*<a class="awesome-button {{ page_name }}" rel="new" href="/api/{{ page_name }}/new">+ Add new</a>*#
 
 <div id="new-item"></div>
-<ul id="data-list" class="data-list">
+<ul id="data-list" class="data-list accordion">
 {% for user in total_user %}
     <li class="user-card">
         <h1 class="user-card starred unapproved deleted">
@@ -28,21 +28,21 @@
                 <a rel="default" href="/admin/star/{{ user.key() }}" class="star"></a>
                 {% end %}
                 {% if not user.is_active %}
-                <a rel="default" href="/admin/approve/{{ user.key() }}" class="awesome-button">Approve</a>
+                <a rel="default" href="/admin/approve/{{ user.key() }}" class="awesome-button"><span class="symbol">&#10004;</span> Approve</a>
                 {% end %}
                 {% if user.is_active %}
-                <a rel="default" href="/admin/unapprove/{{ user.key() }}" class="awesome-button">Unapprove</a>
+                <a rel="default" href="/admin/unapprove/{{ user.key() }}" class="awesome-button"><span class="symbol">&#10004;</span> Unapprove</a>
                 {% end %}
-                <a rel="default" href="/admin/edit/{{ user.key() }}" class="awesome-button">Edit Profile</a>
+                <a class="editprofile awesome-button" rel="default" href="#edit-profile" ><span class="symbol">&minus;</span> Edit Profile</a>
                 {% if not user.is_deleted %}
-                <a rel="default" href="/admin/delete/{{ user.key() }}" class="awesome-button">Delete</a>
+                <a rel="default" href="/admin/delete/{{ user.key() }}" class="awesome-button"><span class="symbol">&times;</span> Delete</a>
                 {% end %}
                 {% if user.is_deleted %}
-                <a rel="default" href="/admin/undelete/{{ user.key() }}" class="awesome-button">Undelete</a>
+                <a rel="default" href="/admin/undelete/{{ user.key() }}" class="awesome-button"><span class="symbol">&times;</span> Undelete</a>
                 {% end %}
             </span>
         </h1>
-        <div class="info">{{ user. email}}</div>
+        <div class="info">email: {{ user. email}}</div>
     </li>
 {% end %}
 </ul>

@@ -34,7 +34,7 @@ from aetycoon import DerivedProperty
 ##################################################################
 
 ################ Imported from version 1 of the code #############
-from datetime import datetime
+from datetime import datetime, timedelta
 from data import countries, calendar
 from cached_counter import CachedCounter as Counter
 
@@ -43,6 +43,10 @@ current_year = datetime.utcnow().year
 BLOG_START_YEAR = 2009
 BLOG_YEAR_LIST = range(BLOG_START_YEAR, current_year + 1)
 MONTH_LIST = calendar.MONTH_NAMES
+
+#for select box prompting the year list
+YEAR_LIST = range(1900, current_year)
+MILS_YEAR_LIST = range(1948, current_year + 1)[::-1]
 
 #Person model choices
 T_SHIRT_SIZES = {

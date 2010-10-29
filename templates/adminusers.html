@@ -70,26 +70,17 @@
                 {% for person in user.people_singleton %}
                 <label for="company">
                     <span class="prefix">company</span>
-                    <input type="text" name="company" value="{{ person.company }}" />
+                    <input type="text" name="company" value="{% if person.company == "" %}None{% else %}{{ person.company }}{% end %}" />
                     <span class="suffix"></span>
                 </label>
-                <input type="hidden" name="phone_count" value="{{ person.phones.count() }}" />
                 
+                <input type="hidden" name="phone_count" value="{{ person.phones.count() }}" />
                 {% for phone in person.phones %}
                 <label for="phone_{{ phone.key() }}">
                     <span class="prefix">phone</span>
                     <input type="text" name="{{ phone.key() }}" value="{{ phone.number }}" />
                     <span class="suffix"></span>
                 </label>
-                
-                #*
-                <label for="phone_{{ loop.index }}">
-                    <span class="prefix">phone {{ loop.index }}</span>
-                    <input type="hidden" name="phone_{{ loop.index }}_key" value="{{ phone.key() }}" />
-                    <input type="text" name="phone_{{ loop.index }}" value="{{ phone.number }}" />
-                    <span class="suffix"></span>
-                </label>
-                *#
                 {% end %}
                 
                 <label for="designation">
@@ -98,6 +89,69 @@
                     <span class="suffix"></span>
                 </label>   
                  
+                <label for="graduation_year">
+                    <span class="prefix">graduation year</span>
+                    <select name="graduation_year">
+                    {% for year in mils_year_list %}
+                      <option value="{{ year }}" {% if year == person.graduation_year %}selected="selected"{% end %}>{{ year }}</option>
+                    {% end %}
+                    </select>
+                    <span class="suffix"></span>
+                </label> 
+                
+                <label for="is_student">
+                    <span class="prefix="></span>
+                    <input type="radio" name="is_student" value="yes" {% if person.is_student %}checked="checked"{% end %} >Is student?</input>
+                    <span class="suffix"></span>
+                </label>
+                <label for="is_student">
+                    <span class="prefix="></span>
+                    <input type="radio" name="is_student" value="no" {% if not person.is_student %}checked="checked"{% end %} >Is not a student?</input>  
+                    <span class="suffix"></span>
+                </label>
+                
+                <label for="gender">
+                    <span class="prefix">gender</span>
+                    <select name="gender">
+                    {% for gender_choice in gender_choices %}
+                      <option value="{{ gender_choice }}" {% if gender_choice == person.gender %}selected="selected"{% end %}>{{ gender_choice }}</option>
+                    {% end %}
+                    </select>
+                    <span class="suffix"></span>
+                </label>
+                
+                #*
+                TODO: Birthday date manupulation
+                <label for="birthdate">
+                    <span class="prefix">birthdate</span>
+                    <select name="birthdate_day">
+                      {% for day in range(1, 32) %}
+                          <option value="{{ day }}" {% if day == birthdate_day %}selected="selected"{% endif %}>{{ day }}</option>
+                      {% endfor %}
+                    </select>
+                    <select name="birthdate_month">
+                      {% for month in month_list %}
+                          <option value="{{ loop.index }}" {% if loop.index == birthdate_month %}selected="selected"{% endif %}>{{ month }}</option>
+                      {% endfor %}
+                    </select>
+                    <select name="birthdate_year">
+                      {% for year in year_list %}
+                          <option value="{{ year }}" {% if year == birthdate_year %}selected="selected"{% endif %}>{{ year }}</option>
+                      {% endfor %}
+                    </select>
+                    <span class="suffix"></span>
+                </label>
+                *#
+                
+                <label for="t_shirt_size">
+                    <span class="prefix">t-shirt size</span>
+                    <select name="t_shirt_size">
+                      {% for size in t_shirt_sizes %}
+                          <option value="{{ size[0] }}" {% if size[0] == person.t_shirt_size %}selected="selected"{% end %}>{{ size[1] }}</option>
+                      {% end %}
+                    </select>
+                    <span class="suffix"></span>
+                </label>
                 {% end %}
                 <label for="submit">
                     <input type="submit" class="awesome-button" name="save" value="Save &raquo;" />

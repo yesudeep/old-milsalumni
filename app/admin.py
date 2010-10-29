@@ -36,7 +36,7 @@ from countries import COUNTRY_ISO_ALPHA_TABLE, COUNTRIES_LIST
 
 
 ####################### Import from version 1 ########################
-from models import BLOG_YEAR_LIST, MONTH_LIST,User,Person,PersonPhone
+from models import BLOG_YEAR_LIST, MONTH_LIST,User,Person,PersonPhone, MILS_YEAR_LIST, GENDER_CHOICES, T_SHIRT_SIZES_TUPLE_MAP
 ######################################################################
 
 
@@ -76,6 +76,9 @@ class UsersHandler(BaseRequestHandler):
                 total_user = TOTAL_USER,
                 approved_user = APPROVED_USER,
                 deleted_user = DELETED_USER,
+                mils_year_list= MILS_YEAR_LIST,
+                gender_choices = GENDER_CHOICES,
+                t_shirt_sizes = T_SHIRT_SIZES_TUPLE_MAP,
                 
                 page_name='users',
                 login_url='/login',
@@ -136,6 +139,13 @@ class EditUsersHandler(BaseRequestHandler):
         person.first_name = self.get_argument('first_name')
         person.last_name = self.get_argument('last_name')
         person.designation = self.get_argument('designation')
+        person.company = self.get_argument('company')
+        person.graduation_year = int(self.get_argument('graduation_year'))
+        person.gender = self.get_argument('gender')
+        person.t_shirt_size = self.get_argument('t_shirt_size')
+        is_student = self.get_argument('is_student')
+        if is_student == 'yes':
+            person.is_student = True
         
         phone_count = int(self.get_argument('phone_count'))
         if phone_count:
@@ -149,6 +159,7 @@ class EditUsersHandler(BaseRequestHandler):
         user.put()
         person.put()
         self.redirect('/admin')
+        #self.write(person.t_shirt_size)
         
         
 class ArticlesHandler(BaseRequestHandler):

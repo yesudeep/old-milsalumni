@@ -24,13 +24,14 @@
 # THE SOFTWARE.
 
 import configuration
-
+##################################################################
 from google.appengine.ext import db
 from google.appengine.ext.db import polymodel
 from dbhelper import SerializableModel
 from pytz.gae import pytz
 from countries import ISO_ALPHA_3_CODES
 from aetycoon import DerivedProperty
+##################################################################
 
 ################ Imported from version 1 of the code #############
 from datetime import datetime
@@ -42,6 +43,53 @@ current_year = datetime.utcnow().year
 BLOG_START_YEAR = 2009
 BLOG_YEAR_LIST = range(BLOG_START_YEAR, current_year + 1)
 MONTH_LIST = calendar.MONTH_NAMES
+
+#Person model choices
+T_SHIRT_SIZES = {
+    'small': 'Small',
+    'medium': 'Medium',
+    'large': 'Large',
+    'extra_large': 'Extra Large',
+}
+T_SHIRT_TYPES_TUPLE_MAP = [(k, v) for k, v in T_SHIRT_SIZES.iteritems()]
+T_SHIRT_TYPES = [k for k, v in T_SHIRT_SIZES.iteritems()]
+T_SHIRT_TYPES.sort()
+
+GENDER_CHOICES = (
+    'male',
+    'female',
+)
+
+#Mailing-address choices
+ADDRESS_TYPES = (
+    'home',
+    'residence',
+    'work',
+    'correspondence',
+    'permanent',
+    'temporary',
+    'other',
+)
+
+RAILWAY_LINES = {
+    'western': 'Western',
+    'central': 'Central',
+    'harbor': 'Harbor',
+    'other': 'Out of Mumbai',
+}
+RAILWAY_LINE_TYPES = [k for k, v in RAILWAY_LINES.iteritems()]
+RAILWAY_LINE_TYPES.sort()
+RAILWAY_LINES_TUPLE_MAP = [(k, v) for k, v in RAILWAY_LINES.iteritems()]
+
+#Phone model choices
+PHONE_TYPES = (
+    'mobile',
+    'home',
+    'work',
+    'fax',
+    'pager',
+    'other',
+)
 
 class User(SerializableModel):
     username = db.StringProperty(required=True)
@@ -178,7 +226,47 @@ class User(SerializableModel):
             memcache.set(cache_key, user, ONE_MINUTE)
             return user    
 
-    
+class Person(SerializableModel):
+    first_name = db.StringProperty()
+    last_name = db.StringProperty()
+    birthdate = db.DateProperty()
+    designation = db.StringProperty()
+    company = db.StringProperty()
+    t_shirt_size = db.StringProperty(choices=T_SHIRT_TYPES)
+    gender = db.StringProperty(choices=GENDER_CHOICES)
+    graduation_year = db.IntegerProperty()
+    is_student = db.BooleanProperty(default=False)
+
+    user = db.ReferenceProperty(User, collection_name='people_singleton')
+
+    def __str__(self):
+        return ' '.join([self.first_name, self.last_name])
+
+class MailingAddress(SerializableModel):
+    address_type = db.StringProperty(choices=ADDRESS_TYPES)
+    address_line = db.PostalAddressProperty()
+    apartment = db.StringProperty()
+    state_province = db.StringProperty()
+    city = db.StringProperty()
+    zip_code = db.StringProperty()
+    street_name = db.StringProperty()
+    country = db.StringProperty(choices=countries.ISO_ALPHA_3_CODES)
+    landmark = db.StringProperty() 
+    nearest_railway_line = db.StringProperty(choices=RAILWAY_LINE_TYPES)
+
+class PersonAddress(MailingAddress):
+    person = db.ReferenceProperty(Person, collection_name='addresses')
+
+class Phone(SerializableModel):
+    phone_type = db.StringProperty(choices=PHONE_TYPES)
+    number = db.StringProperty()
+
+    def __str__(self):
+        return ' '.join([self.number, '(', self.phone_type, ')'])
+
+class PersonPhone(Phone):
+    person = db.ReferenceProperty(Person, collection_name='phones')        
+            
 ###################################################################
 TIMEZONE_CHOICES = pytz.all_timezones
 DEFAULT_TIMEZONE_CHOICE = configuration.DEFAULT_TIMEZONE
@@ -347,7 +435,7 @@ class Host(SerializableModel):
     http_referrer = db.StringProperty()
 
 
-class Person(Profile):
+class PersonNew(Profile):
     """
     Personal information.
 
@@ -413,7 +501,7 @@ class WorkProfile(SerializableModel):
     """
     designation = db.StringProperty()
     company = db.StringProperty()
-    person = db.ReferenceProperty(Person, collection_name='work_profiles')
+    person = db.ReferenceProperty(PersonNew, collection_name='work_profiles')
 
 
     def __unicode__(self):

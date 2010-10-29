@@ -36,7 +36,7 @@ from countries import COUNTRY_ISO_ALPHA_TABLE, COUNTRIES_LIST
 
 
 ####################### Import from version 1 ########################
-from models import BLOG_YEAR_LIST, MONTH_LIST,User
+from models import BLOG_YEAR_LIST, MONTH_LIST,User,Person,PersonPhone
 ######################################################################
 
 
@@ -52,7 +52,17 @@ ereporter.register_logger()
 
 class UsersHandler(BaseRequestHandler):
     def get(self):
-        #User(username='Aswad', email='aswad.r@gmail.com', identifier='Google').put()
+        new_user = User(username='Aswad', email='aswad.r@gmail.com', identifier='Google')
+        #new_user.put()
+        
+        new_person = Person(
+                            first_name = 'Aswad',
+                            last_name = 'Rangnekar',
+                            #user = new_user
+                            )
+        #new_person.put()
+        #new_phone1 = PersonPhone(number='9960815827', person=new_person).put()
+        #new_phone2 = PersonPhone(number='26652590', person=new_person).put()
         
         #getting total, approved and deleted users 
         TOTAL_USER = User.all()
@@ -112,6 +122,34 @@ class UnstarUsersHandler(BaseRequestHandler):
         user.is_starred = False
         user.put()
         self.redirect('/admin')
+        
+class EditUsersHandler(BaseRequestHandler):
+    def post(self,key):
+        user = User.get(key)
+        person_key = user.people_singleton[0].key()
+        person = Person.get(person_key)
+
+        user.email = self.get_argument('email')
+        user.corporate_email = self.get_argument('corporate_email')
+        
+        
+        person.first_name = self.get_argument('first_name')
+        person.last_name = self.get_argument('last_name')
+        person.designation = self.get_argument('designation')
+        
+        phone_count = int(self.get_argument('phone_count'))
+        if phone_count:
+            phones = []
+            for phone in person.phones:
+                str_key = str(phone.key())
+                phone.number = self.get_argument(str_key)
+                phones.append(phone)
+            db.put(phones)
+        
+        user.put()
+        person.put()
+        self.redirect('/admin')
+        
         
 class ArticlesHandler(BaseRequestHandler):
     def get(self):
@@ -180,6 +218,7 @@ urls = (
     (r'/admin/undelete/(.*)', UndeleteUsersHandler),
     (r'/admin/star/(.*)', StarUsersHandler),
     (r'/admin/unstar/(.*)', UnstarUsersHandler),
+    (r'/admin/edit/(.*)', EditUsersHandler),
 
     (r'/admin/articles/?', ArticlesHandler),
     (r'/admin/books/?', BooksHandler),

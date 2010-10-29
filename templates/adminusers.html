@@ -42,7 +42,68 @@
                 {% end %}
             </span>
         </h1>
-        <div class="info">email: {{ user. email}}</div>
+        <div class="info">
+            <form id="{{ user.key() }}" name="{{ user.key() }}" class="decorated-fields tabular" method="post" action="admin/edit/{{ user.key() }}">
+                {% for person in user.people_singleton %}
+                <label for="first_name">
+                    <span class="prefix">first name</span>
+                    <input type="text" name="first_name" value="{{ person.first_name }}" />
+                    <span class="suffix"></span>
+                </label>  
+                <label for="last_name">
+                    <span class="prefix">last name</span>
+                    <input type="text" name="last_name" value="{{ person.last_name }}" />
+                    <span class="suffix"></span>
+                </label>
+                {% end %}
+                <label for="email">
+                    <span class="prefix">email</span>
+                    <input type="text" name="email" value="{{ user.email }}" />
+                    <span class="suffix"><strong>{{ user.signin_email }}</strong> via <strong>{{ user.auth_provider }}</strong> (OpenID: {{ user.identifier }})</span>
+                </label>
+                <label for="corporate_email">
+                    <span class="prefix">corporate email</span>
+                    <input type="text" name="corporate_email" 
+                        value="{% if user.corporate_email == "" %}None{% else %}{{ user.corporate_email }}{% end %}" />
+                    <span class="suffix"></span>
+                </label>
+                {% for person in user.people_singleton %}
+                <label for="company">
+                    <span class="prefix">company</span>
+                    <input type="text" name="company" value="{{ person.company }}" />
+                    <span class="suffix"></span>
+                </label>
+                <input type="hidden" name="phone_count" value="{{ person.phones.count() }}" />
+                
+                {% for phone in person.phones %}
+                <label for="phone_{{ phone.key() }}">
+                    <span class="prefix">phone</span>
+                    <input type="text" name="{{ phone.key() }}" value="{{ phone.number }}" />
+                    <span class="suffix"></span>
+                </label>
+                
+                #*
+                <label for="phone_{{ loop.index }}">
+                    <span class="prefix">phone {{ loop.index }}</span>
+                    <input type="hidden" name="phone_{{ loop.index }}_key" value="{{ phone.key() }}" />
+                    <input type="text" name="phone_{{ loop.index }}" value="{{ phone.number }}" />
+                    <span class="suffix"></span>
+                </label>
+                *#
+                {% end %}
+                
+                <label for="designation">
+                    <span class="prefix">designation</span>
+                    <input type="text" name="designation" value="{{ person.designation }}" />
+                    <span class="suffix"></span>
+                </label>   
+                 
+                {% end %}
+                <label for="submit">
+                    <input type="submit" class="awesome-button" name="save" value="Save &raquo;" />
+                </label>
+            </form>
+        </div>
     </li>
 {% end %}
 </ul>
